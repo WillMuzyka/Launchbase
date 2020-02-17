@@ -1,0 +1,79 @@
+@import "https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+:root {
+	--color-green: #50FA7B;
+	--color-rocket: #7159c1;
+}
+
+.cards {
+	max-width: 800px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 20px;
+}
+
+.card {
+	background-color: var(--color-rocket);
+	cursor: pointer;
+}
+
+.card__img-container img {
+	width: 100%;
+}
+
+.card__content,
+.card__info {
+	padding: 24px;
+}
+
+.card__info {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.card__price {
+	text-align: center;
+	background-color: var(--color-rocket);
+	filter: brightness(90%);
+	padding: 5px 20px;
+	border-radius: 20px;
+}
+
+.modal-overlay {
+	background-color: rgba(0, 0, 0, 0.7);
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.modal {
+	background-color: white;
+	width: 90%;
+	height: 90%;
+	margin: 5vh auto;
+	position: relative;
+}
+
+.modal .close-modal {
+	color: #666;
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+}
+
+iframe {
+	width: 100%;
+	height: 100%;
+}
+
+/*MODAL ACTIVE*/
+
+.modal-overlay.active {
+	opacity: 1;
+	visibility: visible;
+}
