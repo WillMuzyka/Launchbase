@@ -1,0 +1,47 @@
+{% extends "layout.njk" %}
+
+{% block top %}
+  <title>Cursos - LAUNCHBASE: Desafio 2.1</title>
+  <link rel="stylesheet" href="/courses.css">
+{% endblock %}
+
+{% block content %}
+  <div class="courses">
+    <div class="course" id="starter">
+      <img src="https://skylab.rocketseat.com.br/static/64c237ccff807c054339a62d53b4b402.svg" alt="">
+      <h1 class="couse-name">Starter</h1>
+      <p class="info">Cursos 100% online e gratuitos para você entrar com o pé direito nas tecnologias mais desejadas do mercado.</p>
+      <p class="price">Free</p>
+    </div>
+
+    <div class="course" id="launchbase">
+      <img src="https://skylab.rocketseat.com.br/static/0828532024cb46921a6b5e941f8d788d.svg" alt="">
+      <h1 class="couse-name">Launchbase</h1>
+      <p class="info">Domine programação do zero e tenha acesso às melhores oportunidades do mercado no menor tempo possível.</p>
+      <p class="price">Pago</p>
+    </div>
+
+    <div class="course" id="gostack">
+      <img src="https://skylab.rocketseat.com.br/static/83a178a0653dab1d55e2ed7946465975.svg" alt="">
+      <h1 class="couse-name">GoStack</h1>
+      <p class="info">Treinamento imersivo nas tecnologias mais modernas de desenvolvimento web e mobile para quem não tem tempo a perder.</p>
+      <p class="price">Pago</p>
+    </div>
+  </div>
+
+  <div class="modal-container">
+    <div class="modal">
+      <a class="close-modal">
+        <i class="material-icons">close</i>
+      </a>
+
+      <a class="fullscreen-modal">
+        <i class="material-icons">fullscreen</i>
+      </a>
+
+      <iframe width="600" height="400" src="null" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+{% endblock %}
