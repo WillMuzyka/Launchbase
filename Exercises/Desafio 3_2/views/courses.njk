@@ -1,0 +1,35 @@
+{% extends "layout.njk" %}
+
+{% block top %}
+  <title>Cursos - LAUNCHBASE: Desafio 2.1</title>
+  <link rel="stylesheet" href="/courses.css">
+{% endblock %}
+
+{% block content %}
+  <div class="courses">
+    {% for course in courses %}
+      <div class="course" id="{{ course.id }}">
+        <img src="{{ course.img_url }}" alt="Logo {{ course.id }}">
+        <h1 class="couse-name">{{ course.id }}</h1>
+        <p class="info">{{ course.info }}</p>
+        <p class="price">{{ course.price }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="modal-container">
+    <div class="modal">
+      <a class="close-modal">
+        <i class="material-icons">close</i>
+      </a>
+
+      <a class="fullscreen-modal">
+        <i class="material-icons">fullscreen</i>
+      </a>
+
+      <iframe width="600" height="400" src="null" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+{% endblock %}
