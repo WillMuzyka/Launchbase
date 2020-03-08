@@ -1,0 +1,47 @@
+:root {
+	--color-rocket: #7159c1;
+	--color-letter: #AF9EE6;
+}
+
+.up-header {
+	font-family: 'Roboto', sans-serif;
+	padding: 30px 50px;
+	display: flex;
+	align-items: center;
+}
+
+.logo {
+	background-color: var(--color-rocket);
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+}
+
+.header-text {
+	padding: 0;
+	color: black;
+	max-width: 1000px;
+}
+
+.header-text h1 {
+	background-color: var(--color-rocket);
+	color: white;
+	border-radius: 10px;
+	margin: 15px;
+	padding: 15px;
+	text-align: center;
+	font-size: 32px;
+	line-height: 42px;
+	font-style: bold;
+}
+
+.header-text .info {
+	padding: 0 18px;
+	font-size: 18px;
+	padding-bottom: 15px;
+}
+
+.header-text .techs {
+	padding: 0 50px;
+	font-size: 14px;
+}

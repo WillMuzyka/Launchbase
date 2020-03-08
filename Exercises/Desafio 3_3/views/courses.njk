@@ -1,0 +1,24 @@
+{% extends "layout.njk" %}
+
+{% block top %}
+  <title>Cursos - LAUNCHBASE: Desafio 2.1</title>
+  <link rel="stylesheet" href="/courses.css">
+{% endblock %}
+
+{% block content %}
+  <div class="courses {{ 'isSingleCourse' if isSingleCourse }}">
+    {% for course in courses %}
+      <div class="course" id="{{ course.id }}">
+        <img src="{{ course.img_url }}" alt="Logo {{ course.id }}">
+        <p class="info">{{ course.info }}</p>
+        <div class="price">
+          <a class="price__link {{ course.url }}" href="" target="blank">Link</a>
+          <p class="price__value">{{ course.price }}</p>
+        </div>
+
+      </div>
+    {% endfor %}
+  </div>
+
+  <script src="/script.js"></script>
+{% endblock %}
