@@ -1,3 +1,4 @@
+# Challenge 3.1
 This challenge is the first challenge of the third module of the Launchbase Bootcamp of Rocketseat.
 The purpose of this code is to refactor the 2.3 challenge, putting all the files and data on a server that is going to send the HTML files depending on the routes.
 It was also created a 404 page and the pages are build using the Nunjucks template engine.
