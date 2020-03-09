@@ -1,0 +1,29 @@
+{% extends "layout.njk" %}
+
+{% block videos_css %}
+
+  <title>Sobre -
+    {{ about.name }}</title>
+
+{% endblock %}
+
+{% block content %}
+
+  <div id="wrapper">
+    <div id="topInfo">
+      <img src="{{ about.avatar_url }}" alt="Imagem de {{ about.name }}">
+      <h1>{{ about.name }}</h1>
+      <h2>{{ about.univ }}</h2>
+    </div>
+    <h3>{{ about.grad }}</h3>
+    <p>{{ about.grad_info }}</p>
+    <p>{{ about.extra_info }}</p>
+  </div>
+
+  <footer id="links-footer" class="links">
+    {% for link in about.links %}
+      <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
+    {% endfor %}
+  </footer>
+
+{% endblock %}
