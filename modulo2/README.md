@@ -1,2 +1,1 @@
-# Module 3
-In this module the project was taking all the website that was in the front-end (module 2) to the back-end.
+This project was made to develop the skills to build a web interface, with images, texts and links using html, css and js.
