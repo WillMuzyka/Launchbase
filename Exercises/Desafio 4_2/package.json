@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "npm-run-all -p nodemon browserSync",
 		"nodemon": "nodemon server.js",
-		"browserSync": "browser-sync start --proxy http://localhost:5000 --files 'public, views'"
+		"browserSync": "browser-sync start --proxy http://localhost:5000 --files 'public, views, src'"
 	},
 	"author": "William Muzyka Oyarzabal Nunes",
 	"dependencies": {

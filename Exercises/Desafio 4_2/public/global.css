@@ -2,8 +2,10 @@
 
 :root {
 	--color-rocket: #715c91;
+	--color-button: #f7df1e;
 	--color-letter-normal: #777;
 	--color-letter-dark: #555;
+	--color-letter-black: #111;
 }
 
 * {
@@ -70,15 +72,16 @@ header .links a:hover {
 .card {
 	background-color: white;
 	min-height: 500px;
-	width: 500px;
+	width: 800px;
 	overflow: hidden;
 	margin: 40px auto;
 	font-size: 20px;
-	color: #111;
+	color: var(--color-letter-black);
 	display: grid;
-	grid-template-rows: 40% 60%;
+	grid-template-columns: 40% 60%;
 
 	box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.4);
+	border-radius: 4px;
 
 	animation: appear 300ms ease-in-out;
 }
@@ -91,14 +94,9 @@ header .links a:hover {
 	box-sizing: border-box;
 }
 
-.avatar {
-	min-height: 350px;
-}
-
 .details .item {
 	padding: 8px;
 	border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-	display: block;
 }
 
 .details h3 {
@@ -106,15 +104,17 @@ header .links a:hover {
 }
 
 .details .item:last-of-type {
-	border:none;
+	border: none;
 }
 
-.details .item p:nth-child(1),
-.details h3  {
+.details .item div:nth-child(1),
+.details h3 {
 	color: var(--color-letter-normal);
 }
 
-.details .item p:nth-child(2){
+input,
+select,
+.details .item div:nth-child(2) {
 	font-size: 24px;
 }
 
@@ -123,4 +123,49 @@ header .links a:hover {
 		opacity: 0;
 		transform: translateY(15px);
 	}
+}
+
+/* FORM */
+input {
+	width: 100%;
+}
+
+.item span {
+	margin-right: 8px;
+	margin-top: 4px;
+	background-color: var(--color-button);
+	border-radius: 16px;
+	padding: 8px 16px;
+	display: inline-block;
+	color: var(--color-letter-dark);
+}
+
+select.invalid,
+select option[value=""] {
+	color: var(--color-letter-normal);
+}
+
+input[type="radio"] {
+	width: initial;
+	width: 2vh;
+	height: 2vh;
+	display: inline-block;
+	margin-right: 4px;
+}
+
+[hidden] {
+	display: none;
+}
+
+/* BUTTONS */
+button[type="submit"] {
+	text-align: center;
+	font-size: 16px;
+	line-height: 26px;
+	background-color: var(--color-rocket);
+	color: white;
+	padding: 8px 16px;
+	border-radius: 8px;
+	margin-top: 8px;
+	width: 100%;
 }
