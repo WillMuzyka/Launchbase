@@ -1,4 +1,4 @@
-# Challenge 4.1
+# Challenge 4
 This challenge is the challenge of the fourth module of the Launchbase Bootcamp of Rocketseat. In this challenge, was requested that a website with a header containing two links that should have a transition :hover and a ::after. Also was necessary to use the + logic in css.
 Later was added a card with the information of the teacher, with all its details.
 
