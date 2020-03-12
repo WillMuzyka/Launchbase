@@ -1,54 +1,53 @@
 {
-  "teachers": [
-    {
-      "id": 1,
-      "avatar_url": "https://source.unsplash.com/collection/517198/800x800",
-      "name": "João",
-      "birth": 955584000000,
-      "level": "MC",
-      "class_style": "P",
-      "services": "Físico, Matemático",
-      "created_at": 1583963553565
-    },
-    {
-      "id": "2",
-      "avatar_url": "https://source.unsplash.com/collection/517198/800x800",
-      "name": "Maria",
-      "birth": 977702400000,
-      "level": "MI",
-      "class_style": "P",
-      "services": "Bióloga, Pesquisadora",
-      "created_at": 1583963612403
-    },
-    {
-      "id": "3",
-      "avatar_url": "https://source.unsplash.com/collection/517198/800x800",
-      "name": "William",
-      "birth": 866505600000,
-      "level": "SI",
-      "class_style": "D",
-      "services": "Engenharia",
-      "created_at": 1583963648692
-    },
-    {
-      "id": 4,
-      "avatar_url": "https://source.unsplash.com/collection/517198/800x800",
-      "name": "Mayk",
-      "birth": 614217600000,
-      "level": "SC",
-      "class_style": "D",
-      "services": "Desenvolvedor, Design",
-      "created_at": 1583971106135
-    },
-    {
-      "id": "5",
-      "avatar_url": "https://source.unsplash.com/collection/517198/800x800",
-      "name": "Daniel",
-      "birth": 1127952000000,
-      "level": "EC",
-      "class_style": "D",
-      "services": "Biólogo",
-      "created_at": 1583971203422
-    }
-  ]
+	"teachers": [{
+			"id": 1,
+			"avatar_url": "https://source.unsplash.com/collection/517198/800x800",
+			"name": "João",
+			"birth": 955584000000,
+			"level": "MC",
+			"class_style": "P",
+			"services": "Físico, Matemático",
+			"created_at": 1583963553565
+		},
+		{
+			"id": 2,
+			"avatar_url": "https://source.unsplash.com/collection/517198/800x800",
+			"name": "Maria",
+			"birth": 977702400000,
+			"level": "MI",
+			"class_style": "P",
+			"services": "Bióloga, Pesquisadora",
+			"created_at": 1583963612403
+		},
+		{
+			"id": 3,
+			"avatar_url": "https://source.unsplash.com/collection/517198/800x800",
+			"name": "William",
+			"birth": 866505600000,
+			"level": "SI",
+			"class_style": "D",
+			"services": "Engenharia",
+			"created_at": 1583963648692
+		},
+		{
+			"id": 4,
+			"avatar_url": "https://source.unsplash.com/collection/517198/800x800",
+			"name": "Mayk",
+			"birth": 614217600000,
+			"level": "SC",
+			"class_style": "D",
+			"services": "Desenvolvedor, Design",
+			"created_at": 1583971106135
+		},
+		{
+			"id": 5,
+			"avatar_url": "https://source.unsplash.com/collection/517198/800x800",
+			"name": "Daniel",
+			"birth": 1127952000000,
+			"level": "EC",
+			"class_style": "D",
+			"services": "Biólogo",
+			"created_at": 1583971203422
+		}
+	]
 }

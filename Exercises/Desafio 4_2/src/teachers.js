@@ -61,7 +61,7 @@ exports.edit = (req, res) => {
 	return res.render("teachers/edit", { teacher })
 }
 
-exports.put = (req, res) => {
+exports.update = (req, res) => {
 	const { id } = req.body
 	let foundIndex
 	const foundTeacher = data.teachers.find((person, index) => {
@@ -75,6 +75,7 @@ exports.put = (req, res) => {
 	const teacher = {
 		...foundTeacher,
 		...req.body,
+		id: foundTeacher.id,
 		birth: Date.parse(req.body.birth),
 	}
 
@@ -82,6 +83,26 @@ exports.put = (req, res) => {
 
 	console.log(`Updating ${teacher.name}`)
 	fs.writeFile("src/data.json", JSON.stringify(data, null, 2), (err) => {
-		err ? res.send("Erro ao Salvar") : res.redirect(`/teachers/${id}`)
+		err ? res.send("Error trying to save") : res.redirect(`/teachers/${id}`)
+	})
+}
+
+exports.delete = (req, res) => {
+	const { id } = req.body
+	const teachersList = data.teachers.filter(person => person.id != id)
+
+	teachersList.map(teacher => {
+		if (teacher.id > id) {
+			teacher = {
+				...teacher,
+				id: teacher.id--
+			}
+		}
+		return teacher
+	})
+
+	data.teachers = teachersList
+	fs.writeFile("src/data.json", JSON.stringify(data, null, 2), (err) => {
+		err ? res.send("Error trying to save") : res.redirect("/teachers")
 	})
 }

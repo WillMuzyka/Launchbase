@@ -9,6 +9,11 @@
       <form action="/teachers?_method=PUT" method="POST">
         {% include "./fields.njk" %}
         <input type="hidden" name="id" value="{{ teacher.id }}">
+        <button class="edit" type="submit">Salvar</button>
+      </form>
+      <form action="/teachers?_method=DELETE" method="post">
+        <input type="hidden" name="id" value="{{ teacher.id }}">
+        <button class="edit" id="delete" type="submit">Deletar</button>
       </form>
     </section>
   </div>

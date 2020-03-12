@@ -92,6 +92,7 @@ header .links a:hover {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	position: relative;
 }
 
 .details .item {
@@ -169,10 +170,22 @@ a.editButton {
 	border-radius: 8px;
 	margin-top: 8px;
 	width: 100%;
+	cursor: pointer;
 }
 
 a.editButton {
 	text-decoration: none;
 	display: block;
 	box-sizing: border-box;
+}
+
+button#delete {
+	background-color: lightcoral;
+	position: absolute;
+	left: 52%;
+	bottom: 0;
+}
+
+button.edit {
+	width: 49%;
 }
