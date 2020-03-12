@@ -1,45 +1,33 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-  <div class="card">
-    <section class="avatar" style="background: url(https://source.unsplash.com/collection/517198/800x800) no-repeat"></section>
-
-    <section class="details">
-      <h3>Teacher</h3>
-
-      <div class="item">
-        <div>Nome</div>
-        <div>William Nunes</div>
-      </div>
-
-      <div class="item">
-        <div>Idade</div>
-        <div>27 anos</div>
-      </div>
-
-      <div class="item">
-        <div>Grau de Escolaridade</div>
-        <div>Graduação</div>
-      </div>
-
-      <div class="item">
-        <div>Tipo de Aula</div>
-        <div>EAD</div>
-      </div>
-
-      <div class="item">
-        <div>Acompanhamento</div>
-        <div>
-          <span>Musculação</span>
-          <span>Crossfit</span>
-        </div>
-      </div>
-
-      <div class="item">
-        <div>Desde</div>
-        <div>27/01/2020</div>
-      </div>
-    </section>
+  <div class="card table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Acompanhamentos</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for teacher in teachers %}
+        <tr>
+          <td>
+            <span class="avatar" style="background-image: url({{ teacher.avatar_url }})"></span>
+          {{  teacher.name  }}</td>
+          <td>
+          {% for service in teacher.services %}
+            <span class="service">{{  service  }}</span>
+          {% endfor %}
+          </td>
+          <td>
+            <a href="/teachers/{{ teacher.id }}">Visualizar</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 
 {% endblock %}

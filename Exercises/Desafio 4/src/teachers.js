@@ -4,6 +4,20 @@ const { calcAge, showLevel, classType, showDate } = require('./utils')
 
 exports.create = (req, res) => res.render("teachers/create")
 
+exports.index = (req, res) => {
+	let teachers = data.teachers
+	teachers = teachers.map(teacher => {
+		const services = teacher.services.split(",")
+		teacher = {
+			...teacher,
+			services: services,
+		}
+		return teacher
+	})
+	res.render("teachers/index", { teachers })
+
+}
+
 exports.post = (req, res) => {
 	let { name, avatar_url, birth, level, class_style, services } = (req.body)
 	const teacher = {

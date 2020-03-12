@@ -17,6 +17,7 @@
 body {
 	background-color: var(--color-rocket);
 	font-family: 'Roboto', sans-serif;
+	color: var(--color-letter-black);
 }
 
 header {
@@ -84,6 +85,11 @@ header .links a:hover {
 	border-radius: 4px;
 
 	animation: appear 300ms ease-in-out;
+}
+
+.card .avatar {
+	background-position: center;
+	background-size: cover;
 }
 
 .details {
@@ -188,4 +194,75 @@ button#delete {
 
 button.edit {
 	width: 49%;
+}
+
+/* INDEX TABLE */
+.table-container {
+	display: block;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+.table-container table {
+	border-spacing: 0;
+	width: 100%;
+}
+
+th,
+td {
+	padding: 16px;
+	border-bottom: 2px solid #ddd;
+}
+
+th {
+	color: var(--color-letter-normal);
+}
+
+td {
+	font-size: 20px;
+}
+
+th:not(:last-child) {
+	text-align: left;
+	padding-left: 64px;
+}
+
+td:last-child {
+	text-align: center;
+}
+
+td:last-child a,
+td .service {
+	background-color: var(--color-rocket);
+	padding: 8px 16px;
+	border-radius: 4px;
+	text-decoration: none;
+	color: white;
+	box-shadow: 4px 2px 6px -4px black;
+}
+
+tr:last-child td {
+	border-bottom: none;
+}
+
+td .service {
+	background-color: var(--color-button);
+	color: var(--color-letter-normal);
+	border-radius: 16px;
+}
+
+td:first-child {
+	display: grid;
+	grid-template-columns: 64px 1fr;
+	align-items: center;
+}
+
+td .avatar {
+	width: 40px;
+	height: 40px;
+	background-position: center;
+	background-size: cover;
+	border-radius: 50%;
+	border: 2px solid white;
+	box-shadow: 4px 2px 6px -4px black;
 }
