@@ -29,7 +29,7 @@ exports.post = (req, res) => {
 	})
 
 	fs.writeFile("src/data.json", JSON.stringify(data, null, 2), (err) => {
-		err ? res.send(err) : res.redirect("/instructors")
+		err ? res.send(err) : res.redirect(`/instructors/${id}`)
 	})
 }
 
@@ -52,7 +52,7 @@ exports.edit = (req, res) => {
 	const { id } = req.params
 	const foundInstructor = findInstructor(id)
 	if (!foundInstructor) return res.send("Instructor not found")
-	
+
 	const instructor = {
 		...foundInstructor,
 		birth: date(foundInstructor.birth)
@@ -71,20 +71,35 @@ exports.put = (req, res) => {
 		}
 	})
 	if (!foundInstructor) return res.send("Instructor not found")
-	
+
 	const instructor = {
 		...foundInstructor,
 		...req.body,
+		id: Number(req.body.id),
 		birth: Date.parse(req.body.birth)
 	}
 
 	data.instructors[index] = instructor
 
 	fs.writeFile("src/data.json", JSON.stringify(data, null, 2), (err) => {
-		err ? res.send("write error!") : res.redirect(`/instructors/${ id }`)
+		err ? res.send("write error!") : res.redirect(`/instructors/${id}`)
 	})
 }
 
 exports.delete = (req, res) => {
-	return res.send("Delete")
+	const { id } = req.body
+	const instructorsList = data.instructors.filter(inst => inst.id != id)
+	instructorsList.map(inst => {
+		if (inst.id > id) {
+			return {
+				...inst,
+				id: Number(inst.id--)
+			}
+		}
+		return inst
+	})
+	data.instructors = instructorsList
+	fs.writeFile("src/data.json", JSON.stringify(data, null, 2), (err) => {
+		err ? res.send(err) : res.redirect("/instructors")
+	})
 }
