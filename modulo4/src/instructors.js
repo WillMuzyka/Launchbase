@@ -6,6 +6,19 @@ const findInstructor = (id) => {
 	return data.instructors.find(instructor => instructor.id == id)
 }
 
+exports.index = (req, res) => {
+	let instructors = data.instructors.map(instructor => {
+		const services = instructor.services.split(",")
+		const newInstructor = {
+			...instructor,
+			services: services
+		}
+		return newInstructor
+	})
+	console.log(instructors)
+	return res.render("instructors/index", { instructors })
+}
+
 exports.post = (req, res) => {
 	const keys = Object.keys(req.body)
 	for (key of keys) {
