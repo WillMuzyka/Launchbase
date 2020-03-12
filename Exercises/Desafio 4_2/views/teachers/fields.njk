@@ -1,0 +1,53 @@
+<div class="item">
+  <div>URL do Avatar</div>
+  <div>
+    <input required type="url" name="avatar_url" placeholder="http://" value="{{ teacher.avatar_url }}">
+  </div>
+</div>
+
+<div class="item">
+  <div>Nome</div>
+  <div>
+    <input required type="text" name="name" placeholder="Nome" value="{{ teacher.name }}">
+  </div>
+</div>
+
+<div class="item">
+  <div>Data de Nascimento</div>
+  <div>
+    <input required type="date" name="birth" value="{{ teacher.birth }}">
+  </div>
+</div>
+
+<div class="item">
+  <div>Grau de Escolaridade</div>
+  <div>
+    <select required name="level">
+      <option value="" selected disabled hidden=>Selecione um Valor</option>
+      <option value="EC" {% if teacher.levelID === "EC" %}selected{% endif %}>Médio Completo</option>
+      <option value="SI" {% if teacher.levelID === "SI" %}selected{% endif %}>Superior Incompleto</option>
+      <option value="SC" {% if teacher.levelID === "SC" %}selected{% endif %}>Superior Completo</option>
+      <option value="MI" {% if teacher.levelID === "MI" %}selected{% endif %}>Mestrado Incompleto</option>
+      <option value="MC" {% if teacher.levelID === "MC" %}selected{% endif %}>Mestrado Completo</option>
+      <option value="DI" {% if teacher.levelID === "DI" %}selected{% endif %}>Doutorado Incompleto</option>
+      <option value="DC" {% if teacher.levelID === "DC" %}selected{% endif %}>Doutorado Completo</option>
+    </select>
+  </div>
+</div>
+
+<div class="item">
+  <div>Tipo de Aula</div>
+  <div>
+    <span><input type="radio" name="class_style" value="P" checked>Presencial</span>
+    <span><input type="radio" name="class_style" value="D"{% if teacher.class_styleID === "D" %}checked{% endif %}>À distância</span>
+  </div>
+</div>
+
+<div class="item">
+  <div>Acompanhamento</div>
+  <div>
+    <input required type="text" name="services" placeholder="Separe os itens com vírgula"  value="{{ teacher.services }}">
+  </div>
+</div>
+
+<button type="submit">Salvar</button>

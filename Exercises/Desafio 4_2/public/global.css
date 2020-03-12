@@ -158,14 +158,21 @@ input[type="radio"] {
 }
 
 /* BUTTONS */
-button[type="submit"] {
+button[type="submit"],
+a.editButton {
 	text-align: center;
-	font-size: 16px;
-	line-height: 26px;
+	font-size: 20px;
+	line-height: 30px;
 	background-color: var(--color-rocket);
 	color: white;
 	padding: 8px 16px;
 	border-radius: 8px;
 	margin-top: 8px;
 	width: 100%;
+}
+
+a.editButton {
+	text-decoration: none;
+	display: block;
+	box-sizing: border-box;
 }

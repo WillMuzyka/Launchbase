@@ -7,59 +7,7 @@
     <section class="details">
       <h3>Informações do Novo Professor</h3>
 
-      <div class="item">
-        <div>URL do Avatar</div>
-        <div>
-          <input required type="url" name="avatar_url" placeholder="http://">
-        </div>
-      </div>
-
-      <div class="item">
-        <div>Nome</div>
-        <div>
-          <input required type="text" name="name" placeholder="Nome">
-        </div>
-      </div>
-
-      <div class="item">
-        <div>Data de Nascimento</div>
-        <div>
-          <input required type="date" name="birth">
-        </div>
-      </div>
-
-      <div class="item">
-        <div>Grau de Escolaridade</div>
-        <div>
-          <select required name="level">
-            <option value="" selected disabled hidden=>Selecione um Valor</option>
-            <option value="MC">Médio Completo</option>
-            <option value="SI">Superior Incompleto</option>
-            <option value="SC">Superior Completo</option>
-            <option value="MI">Mestrado Incompleto</option>
-            <option value="MC">Mestrado Completo</option>
-            <option value="DI">Doutorado Incompleto</option>
-            <option value="DC">Doutorado Completo</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="item">
-        <div>Tipo de Aula</div>
-        <div>
-          <span><input type="radio" name="class_style" value="P" checked>Presencial</span>
-          <span><input type="radio" name="class_style" value="D">À distância</span>
-        </div>
-      </div>
-
-      <div class="item">
-        <div>Acompanhamento</div>
-        <div>
-          <input required type="text" name="services" placeholder="Separe os itens com vírgula">
-        </div>
-      </div>
-
-      <button type="submit">Salvar</button>
+      {% include "./fields.njk" %}
     </section>
   </form>
 {% endblock %}
