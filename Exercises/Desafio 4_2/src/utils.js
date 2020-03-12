@@ -9,12 +9,11 @@ exports.calcAge = (timestamp) => {
 	return age
 }
 
-exports.showDate = (timestamp, key) => {
+exports.showDate = (timestamp) => {
 	const newDate = new Date(timestamp)
 	const year = newDate.getUTCFullYear()
 	const month = `0${newDate.getUTCMonth() + 1}`.slice(-2)
 	const date = `0${newDate.getUTCDate()}`.slice(-2)
-	if (key) return `${date}/${month}/${year}`
 	return `${year}-${month}-${date}`
 }
 

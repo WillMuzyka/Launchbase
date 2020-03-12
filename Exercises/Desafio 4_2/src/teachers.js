@@ -36,7 +36,7 @@ exports.show = (req, res) => {
 		level: showLevel(foundTeacher.level),
 		class_style: classType(foundTeacher.class_style),
 		age: calcAge(foundTeacher.birth),
-		created_at: showDate(foundTeacher.created_at, true),
+		created_at: new Intl.DateTimeFormat("en-GB").format(foundTeacher.created_at),
 		services: foundTeacher.services.split(",")
 	}
 	console.log(`Showing ${teacher.name}`)
@@ -52,7 +52,7 @@ exports.edit = (req, res) => {
 		...foundTeacher,
 		level: showLevel(foundTeacher.level),
 		class_style: classType(foundTeacher.class_style),
-		birth: showDate(foundTeacher.birth, false),
+		birth: showDate(foundTeacher.birth),
 		services: foundTeacher.services.split(","),
 		levelID: foundTeacher.level,
 		class_styleID: foundTeacher.class_style
