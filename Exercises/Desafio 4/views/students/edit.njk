@@ -1,0 +1,21 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+  <div class="card">
+    <section class="avatar" style="background-image: url({{ student.avatar_url }})"></section>
+
+    <section class="details">
+      <h3>Atualização do Aluno</h3>
+      <form action="/students?_method=PUT" method="POST">
+        {% include "./fields.njk" %}
+        <input type="hidden" name="id" value="{{ student.id }}">
+        <button class="edit" type="submit">Salvar</button>
+      </form>
+      <form class="formDelete" action="/students?_method=DELETE" method="post">
+        <input type="hidden" name="id" value="{{ student.id }}">
+        <button class="edit" id="delete" type="submit">Deletar</button>
+      </form>
+    </section>
+  </div>
+  {% include "confirm.njk" %}
+{% endblock %}

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
 :root {
-	--color-rocket: #715c91;
+	--color-rocket: #7159c1;
 	--color-button: #f7df1e;
 	--color-letter-normal: #777;
 	--color-letter-dark: #555;
@@ -166,7 +166,8 @@ input[type="radio"] {
 
 /* BUTTONS */
 button[type="submit"],
-a.editButton {
+a.editButton,
+.table-container>a {
 	text-align: center;
 	font-size: 20px;
 	line-height: 30px;
@@ -194,6 +195,13 @@ button#delete {
 
 button.edit {
 	width: 49%;
+}
+
+.table-container>a {
+	text-decoration: none;
+	margin-bottom: 16px;
+	display: inline-block;
+	width: initial;
 }
 
 /* INDEX TABLE */
@@ -265,4 +273,13 @@ td .avatar {
 	border-radius: 50%;
 	border: 2px solid white;
 	box-shadow: 4px 2px 6px -4px black;
+}
+
+#student td,
+#student th {
+	text-align: center;
+}
+
+#student th {
+	padding-left: 16px;
 }

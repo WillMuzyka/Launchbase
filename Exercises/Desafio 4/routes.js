@@ -1,26 +1,26 @@
 const express = require('express')
 const routes = express.Router()
-const teachers = require('./src/teachers')
+const teachers = require('./controller/teachers')
+const students = require('./controller/students')
 
 routes.get("/", (req, res) => res.redirect("/teachers"))
 
 /* TEACHER */
-//index
 routes.get("/teachers", teachers.index)
-//create
 routes.get("/teachers/create", teachers.create)
-//show
 routes.get("/teachers/:id", teachers.show)
-//edit
 routes.get("/teachers/:id/edit", teachers.edit)
-//post
 routes.post("/teachers", teachers.post)
-//update
 routes.put("/teachers", teachers.update)
-//delete
 routes.delete("/teachers", teachers.delete)
 
 /* STUDENT */
-routes.get("/students", (req, res) => res.render("students/index"))
+routes.get("/students", students.index)
+routes.get("/students/create", students.create)
+routes.get("/students/:id", students.show)
+routes.get("/students/:id/edit", students.edit)
+routes.post("/students", students.post)
+routes.put("/students", students.update)
+routes.delete("/students", students.delete)
 
 module.exports = routes
