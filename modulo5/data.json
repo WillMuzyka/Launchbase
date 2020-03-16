@@ -1,0 +1,64 @@
+{
+	"instructors": [{
+			"id": 1,
+			"avatar_url": "https://images.unsplash.com/photo-1582442471832-afc9e56ac119?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "William",
+			"birth": 866505600000,
+			"gender": "M",
+			"services": "Crossfit, Musculação",
+			"created_at": 1583894756171
+		},
+		{
+			"id": 2,
+			"avatar_url": "https://images.unsplash.com/photo-1583454155184-870a1f63aebc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "Maria",
+			"birth": 977702400000,
+			"gender": "F",
+			"services": "Crossfit, Musculação, Natação",
+			"created_at": 1583930387189
+		},
+		{
+			"id": 3,
+			"avatar_url": "https://images.unsplash.com/photo-1582442471832-afc9e56ac119?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "João",
+			"birth": 955584000000,
+			"gender": "M",
+			"services": "Crossfit, Musculação, Natação",
+			"created_at": 1583930545957
+		},
+		{
+			"id": 4,
+			"avatar_url": "https://images.unsplash.com/photo-1583454155184-870a1f63aebc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "Daniel",
+			"birth": 997228800000,
+			"gender": "M",
+			"services": "Musculação",
+			"created_at": 1584045641352
+		}
+	],
+	"members": [{
+			"id": 1,
+			"avatar_url": "https://images.unsplash.com/photo-1582442471832-afc9e56ac119?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "Amadeus",
+			"email": "daniel@gmail.com",
+			"birth": 976579200000,
+			"gender": "M",
+			"blood": "A-",
+			"weight": "90",
+			"height": "165",
+			"created_at": 1584060036833
+		},
+		{
+			"id": 2,
+			"avatar_url": "https://images.unsplash.com/photo-1583454155184-870a1f63aebc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "William",
+			"email": "william@gmail.com",
+			"birth": 866505600000,
+			"gender": "M",
+			"blood": "B+",
+			"weight": "70",
+			"height": "185",
+			"created_at": 1584063754892
+		}
+	]
+}

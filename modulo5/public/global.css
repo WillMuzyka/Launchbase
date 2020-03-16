@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+:root {
+	--color-rocket: #7159c1;
+	--color-bg: #f7df1e;
+	--color-letter-normal: #777;
+	--color-letter-dark: #555;
+}
+
+* {
+	padding: 0;
+	border: 0;
+	margin: 0;
+}
+
+body {
+	background-color: var(--color-rocket);
+	font-family: 'Roboto', sans-serif;
+}
+
+header {
+	background-color: white;
+	width: 100%;
+	padding: 26px;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.links {
+	font-size: 22px;
+	line-height: 32px;
+}
+
+header .links a {
+	text-decoration: none;
+	color: var(--color-letter-normal);
+	position: relative;
+}
+
+header .links a+a {
+	margin-left: 32px;
+}
+
+header .links a.active {
+	font-weight: bold;
+	color: var(--color-rocket);
+}
+
+header .links a:hover {
+	color: var(--color-rocket);
+}
+
+.links a::after {
+	content: "";
+	width: 0;
+	height: 2px;
+	background-color: var(--color-rocket);
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	bottom: -1px;
+	transition: width;
+}
+
+.links a:hover::after {
+	width: 100%;
+	transition: width 200ms cubic-bezier(1, 0.25, 0.60, 0.85);
+}
+
+/* CARD */
+
+.card {
+	background-color: white;
+	width: 800px;
+	min-height: 400px;
+	margin: 45px auto;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+
+	box-shadow: 0px 2px 6px -2px rgba(1, 1, 1, 0.4);
+
+	animation: up 300ms ease-in-out;
+}
+
+@keyframes up {
+	from {
+		opacity: 0;
+		transform: translateY(15px);
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+/* ERR PAGE */
+.err {
+	display: block;
+	text-align: center;
+	color: #111;
+}
+
+.err .err-info {
+	padding: 32px;
+}
+
+.err img {
+	max-height: 400px;
+	max-width: 400px;
+}
+
+/* DETAILS CARD */
+.details {
+	padding: 32px;
+}
+
+.details .item {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	padding: 16px 0;
+}
+
+.details .item:last-of-type {
+	border-bottom: none;
+}
+
+.details h3,
+.details .item div:nth-child(1) {
+	color: var(--color-letter-normal);
+	font-size: 14px;
+	line-height: 24px;
+	letter-spacing: 0.7px;
+}
+
+.details .item div:nth-child(2) {
+	color: #555;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.details h3 {
+	text-transform: uppercase;
+	font-weight: bold;
+	color: var(--color-rocket);
+}
+
+.details .item span,
+td #service {
+	padding: 8px 16px;
+	background-color: var(--color-bg);
+	border-radius: 16px;
+	color: var(--color-letter-normal);
+	margin-right: 4px;
+	margin-top: 8px;
+	display: inline-block;
+}
+
+/* FORM */
+input,
+select {
+	width: 100%;
+	outline: none;
+	color: #555;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+input[type="radio"] {
+	width: initial;
+	margin-right: 4px;
+}
+
+input::placeholder {
+	font-size: 16px;
+	font-weight: normal;
+}
+
+button[type="submit"],
+.details a.editButton {
+	padding: 8px 32px;
+	background-color: var(--color-rocket);
+	border-radius: 4px;
+	width: 100%;
+	margin-top: 8px;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.details a.editButton {
+	display: block;
+	box-sizing: border-box;
+	text-align: center;
+	text-decoration: none;
+}
+
+.details #formDelete button {
+	background-color: lightcoral;
+}
+
+/* INDEX INSTRUCTORS */
+.table-container {
+	display: block;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+table {
+	border-spacing: 0;
+}
+
+thead th {
+	text-align: left;
+}
+
+thead th:not(:last-child) {
+	padding-left: 48px;
+}
+
+thead th:last-child,
+td:last-child {
+	text-align: center;
+}
+
+td,
+th {
+	padding: 16px;
+	border-bottom: 1px solid #ddd;
+}
+
+th {
+	text-transform: uppercase;
+	color: var(--color-letter-normal);
+	font-size: 14px;
+}
+
+tbody tr:last-child td {
+	border: none
+}
+
+tbody tr td:first-child {
+	display: grid;
+	grid-template-columns: 64px 1fr;
+	align-items: center;
+}
+
+tbody tr td:first-child span {
+	width: 48px;
+	height: 48px;
+	background-position: center;
+	background-size: cover;
+	border-radius: 50%;
+	border: 2px solid white;
+	box-shadow: 4px 2px 6px -4px black;
+}
+
+tbody td:last-child a,
+.table-container>a {
+	background-color: var(--color-rocket);
+	padding: 8px 16px;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: white;
+	font-size: 12px;
+	border-radius: 4px;
+}
+
+.table-container>a {
+	display: inline-block;
+	margin-bottom: 16px;
+}
+
+table#member th,
+table#member td {
+	text-align: center;
+}
+
+table#member th {
+	padding-left: 16px;
+}

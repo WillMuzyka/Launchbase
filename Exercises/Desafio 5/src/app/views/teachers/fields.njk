@@ -1,0 +1,51 @@
+<div class="item">
+  <div>URL do Avatar</div>
+  <div>
+    <input required type="url" name="avatar_url" placeholder="http://" value="{{ teacher.avatar_url }}">
+  </div>
+</div>
+
+<div class="item">
+  <div>Nome</div>
+  <div>
+    <input required type="text" name="name" placeholder="Nome" value="{{ teacher.name }}">
+  </div>
+</div>
+
+<div class="item">
+  <div>Data de Nascimento</div>
+  <div>
+    <input required type="date" name="birth" value="{{ teacher.birth }}">
+  </div>
+</div>
+
+<div class="item">
+  <div>Grau de Escolaridade</div>
+  <div>
+    <select required name="education_level">
+      <option value="" selected disabled hidden=>Selecione um Valor</option>
+      <option value="EC" {% if teacher.education_level == "EC" %}selected{% endif %}>Médio Completo</option>
+      <option value="SI" {% if teacher.education_level == "SI" %}selected{% endif %}>Superior Incompleto</option>
+      <option value="SC" {% if teacher.education_level == "SC" %}selected{% endif %}>Superior Completo</option>
+      <option value="MI" {% if teacher.education_level == "MI" %}selected{% endif %}>Mestrado Incompleto</option>
+      <option value="MC" {% if teacher.education_level == "MC" %}selected{% endif %}>Mestrado Completo</option>
+      <option value="DI" {% if teacher.education_level == "DI" %}selected{% endif %}>Doutorado Incompleto</option>
+      <option value="DC" {% if teacher.education_level == "DC" %}selected{% endif %}>Doutorado Completo</option>
+    </select>
+  </div>
+</div>
+
+<div class="item">
+  <div>Tipo de Aula</div>
+  <div>
+    <span><input type="radio" name="class_type" value="P"{% if teacher.class_type != "D" %}checked{% endif %}>Presencial</span>
+    <span><input type="radio" name="class_type" value="D"{% if teacher.class_type == "D" %}checked{% endif %}>À distância</span>
+  </div>
+</div>
+
+<div class="item">
+  <div>Acompanhamento</div>
+  <div>
+    <input required type="text" name="subjects_taught" placeholder="Separe os itens com vírgula"  value="{{ teacher.subjects_taught }}">
+  </div>
+</div>

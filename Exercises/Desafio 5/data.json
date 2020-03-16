@@ -1,0 +1,84 @@
+{
+	"teachers": [{
+			"id": 1,
+			"avatar_url": "https://images.unsplash.com/photo-1495995424756-6a5a3f9e7543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "João",
+			"birth": 955584000000,
+			"level": "MC",
+			"class_style": "P",
+			"services": "Física, Matemática",
+			"created_at": 1583963553565
+		},
+		{
+			"id": 2,
+			"avatar_url": "https://images.unsplash.com/photo-1526315691150-b5b70287b533?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "Maria",
+			"birth": 977702400000,
+			"level": "MI",
+			"class_style": "P",
+			"services": "Biologia, Química",
+			"created_at": 1583963612403
+		},
+		{
+			"id": 3,
+			"avatar_url": "https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "William",
+			"birth": 866505600000,
+			"level": "SI",
+			"class_style": "D",
+			"services": "Cálculo",
+			"created_at": 1583963648692
+		},
+		{
+			"id": 4,
+			"avatar_url": "https://images.unsplash.com/photo-1544535830-9df3f56fff6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=700&q=60",
+			"name": "Mayk",
+			"birth": 614217600000,
+			"level": "SC",
+			"class_style": "D",
+			"services": "Programação, Design",
+			"created_at": 1583971106135
+		},
+		{
+			"id": 5,
+			"avatar_url": "https://images.unsplash.com/photo-1573496800808-56566a492b63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "Ana",
+			"birth": 1127952000000,
+			"level": "EC",
+			"class_style": "D",
+			"services": "Biologia",
+			"created_at": 1583971203422
+		},
+		{
+			"id": 6,
+			"avatar_url": "https://images.unsplash.com/photo-1495995424756-6a5a3f9e7543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "Amadeus",
+			"birth": -302572800000,
+			"level": "DC",
+			"class_style": "P",
+			"services": "Português, Inglês",
+			"created_at": 1584067872322
+		}
+	],
+	"students": [{
+			"id": 1,
+			"avatar_url": "https://images.unsplash.com/photo-1495995424756-6a5a3f9e7543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "Claudio",
+			"birth": 1198540800000,
+			"email": "claudio@gmail.com",
+			"year": "F5",
+			"credits": "36",
+			"created_at": 1584069822702
+		},
+		{
+			"id": 2,
+			"avatar_url": "https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+			"name": "Carlos",
+			"birth": 1245888000000,
+			"email": "carlos@gmail.com",
+			"year": "M1",
+			"credits": 20,
+			"created_at": 1584073308698
+		}
+	]
+}

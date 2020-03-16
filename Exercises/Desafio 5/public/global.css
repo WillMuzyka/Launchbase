@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+:root {
+	--color-rocket: #7159c1;
+	--color-button: #f7df1e;
+	--color-letter-normal: #777;
+	--color-letter-dark: #555;
+	--color-letter-black: #111;
+}
+
+* {
+	padding: 0;
+	border: 0;
+	margin: 0;
+}
+
+body {
+	background-color: var(--color-rocket);
+	font-family: 'Roboto', sans-serif;
+	color: var(--color-letter-black);
+}
+
+header {
+	background-color: white;
+	width: 100%;
+	padding: 26px;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.links {
+	font-size: 22px;
+	line-height: 32px;
+}
+
+header .links a {
+	text-decoration: none;
+	color: var(--color-letter-normal);
+	position: relative;
+}
+
+header .links a+a {
+	margin-left: 32px;
+}
+
+header .links a.active {
+	font-weight: bold;
+	color: var(--color-rocket);
+}
+
+header .links a:hover {
+	color: var(--color-rocket);
+}
+
+.links a::after {
+	content: "";
+	width: 0;
+	height: 2px;
+	background-color: var(--color-rocket);
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	bottom: -1px;
+	transition: width;
+}
+
+.links a:hover::after {
+	width: 100%;
+	transition: width 200ms cubic-bezier(1, 0.25, 0.60, 0.85);
+}
+
+/* CARD */
+.card {
+	background-color: white;
+	min-height: 500px;
+	width: 800px;
+	overflow: hidden;
+	margin: 40px auto;
+	font-size: 20px;
+	color: var(--color-letter-black);
+	display: grid;
+	grid-template-columns: 40% 60%;
+
+	box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.4);
+	border-radius: 4px;
+
+	animation: appear 300ms ease-in-out;
+}
+
+.card .avatar {
+	background-position: center;
+	background-size: cover;
+}
+
+.details {
+	margin: 32px;
+	display: block;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.details .item {
+	padding: 8px;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.details h3 {
+	font-size: 20px;
+}
+
+.details .item:last-of-type {
+	border: none;
+}
+
+.details .item div:nth-child(1),
+.details h3 {
+	color: var(--color-letter-normal);
+}
+
+input,
+select,
+.details .item div:nth-child(2) {
+	font-size: 24px;
+}
+
+@keyframes appear {
+	from {
+		opacity: 0;
+		transform: translateY(15px);
+	}
+}
+
+/* FORM */
+input {
+	width: 100%;
+}
+
+.item span {
+	margin-right: 8px;
+	margin-top: 4px;
+	background-color: var(--color-button);
+	border-radius: 16px;
+	padding: 8px 16px;
+	display: inline-block;
+	color: var(--color-letter-dark);
+}
+
+select.invalid,
+select option[value=""] {
+	color: var(--color-letter-normal);
+}
+
+input[type="radio"] {
+	width: initial;
+	width: 2vh;
+	height: 2vh;
+	display: inline-block;
+	margin-right: 4px;
+}
+
+[hidden] {
+	display: none;
+}
+
+/* BUTTONS */
+button[type="submit"],
+a.editButton,
+.table-container>a {
+	text-align: center;
+	font-size: 20px;
+	line-height: 30px;
+	background-color: var(--color-rocket);
+	color: white;
+	padding: 8px 16px;
+	border-radius: 8px;
+	margin-top: 8px;
+	width: 100%;
+	cursor: pointer;
+}
+
+.table-container>a {
+	background-color: #5991c1;
+}
+
+a.editButton {
+	text-decoration: none;
+	display: block;
+	box-sizing: border-box;
+}
+
+button#delete {
+	background-color: lightcoral;
+	position: absolute;
+	left: 52%;
+	bottom: 0;
+}
+
+button.edit {
+	width: 49%;
+}
+
+.table-container>a {
+	text-decoration: none;
+	margin-bottom: 16px;
+	display: inline-block;
+	width: initial;
+}
+
+/* INDEX TABLE */
+.table-container {
+	display: block;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+.table-container table {
+	border-spacing: 0;
+	width: 100%;
+}
+
+th,
+td {
+	padding: 16px;
+	border-bottom: 2px solid #ddd;
+}
+
+th {
+	color: var(--color-letter-normal);
+}
+
+td {
+	font-size: 20px;
+}
+
+th:not(:last-child) {
+	text-align: left;
+	padding-left: 64px;
+}
+
+td:last-child {
+	text-align: center;
+}
+
+td:last-child a,
+td .subject {
+	background-color: var(--color-rocket);
+	padding: 8px 16px;
+	border-radius: 4px;
+	text-decoration: none;
+	color: white;
+	box-shadow: 4px 2px 6px -4px black;
+}
+
+tr:last-child td {
+	border-bottom: none;
+}
+
+td .subject {
+	background-color: var(--color-button);
+	color: var(--color-letter-normal);
+	border-radius: 16px;
+}
+
+td:first-child {
+	display: grid;
+	grid-template-columns: 64px 1fr;
+	align-items: center;
+}
+
+td .avatar {
+	width: 40px;
+	height: 40px;
+	background-position: center;
+	background-size: cover;
+	border-radius: 50%;
+	border: 2px solid white;
+	box-shadow: 4px 2px 6px -4px black;
+}
+
+#student td,
+#student th {
+	text-align: center;
+}
+
+#student th {
+	padding-left: 16px;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html>
+
+  <head>
+
+    <link rel="stylesheet" href="/global.css">
+
+    {% block videos_css %}
+      <title>Particular Classes</title>
+    {% endblock %}
+
+  </head>
+
+  <body>
+    <header>
+      <div class="links">
+        <a href="/teachers">Professores</a>
+        <a href="/students">Alunos</a>
+      </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+  </body>
+
+  <script src="/scripts.js"></script>
+</html>
