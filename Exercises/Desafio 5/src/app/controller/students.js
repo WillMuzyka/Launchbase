@@ -2,15 +2,28 @@ const { calcAge, showGrade, showDate } = require('../../lib/utils')
 const Student = require('../../models/Student')
 
 module.exports = {
-	create: (req, res) => res.render("students/create"),
+	create: (req, res) => {
+		Student.teacherOptions(teacherOptions => res.render("students/create", { teacherOptions }))
+	},
 	index: (req, res) => {
-		Student.all(students => {
-			students = students.map(student => {
-				student.school_year = showGrade(student.school_year)
-				return student
+		const { filter } = req.query
+		if (filter) {
+			Student.findBy(filter, students => {
+				students = students.map(student => {
+					student.school_year = showGrade(student.school_year)
+					return student
+				})
+				res.render("students/index", { students, filter })
 			})
-			res.render("students/index", { students })
-		})
+		} else {
+			Student.all(students => {
+				students = students.map(student => {
+					student.school_year = showGrade(student.school_year)
+					return student
+				})
+				res.render("students/index", { students })
+			})
+		}
 	},
 	post: (req, res) => {
 		const values = [
@@ -21,6 +34,7 @@ module.exports = {
 			req.body.school_year,
 			req.body.credits,
 			showDate(Date.now()).iso,
+			req.body.teacher_id
 		]
 
 		Student.create(values, () => {
@@ -49,7 +63,7 @@ module.exports = {
 			student.birth = showDate(student.birth).iso
 
 			console.log(`Editing ${student.name}`)
-			return res.render("students/edit", { student })
+			Student.teacherOptions(teacherOptions => res.render("students/edit", { student, teacherOptions }))
 		})
 	},
 	update: (req, res) => {
@@ -60,6 +74,7 @@ module.exports = {
 			req.body.email,
 			req.body.school_year,
 			req.body.credits,
+			req.body.teacher_id,
 			req.body.id
 		]
 

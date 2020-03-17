@@ -49,3 +49,17 @@
     <input required type="number" name="credits" placeholder="# horas" value="{{ student.credits }}">
   </div>
 </div>
+
+<div class="item">
+  <div>Professor</div>
+  <div>
+    <select name="teacher_id">
+      <option value="" selected disabled hidden=>Selecione um Professor</option>
+      {% for teacher in teacherOptions %}
+        <option value="{{ teacher.id }}" {% if student.teacher_id == teacher.id %}selected{% endif %}>
+          {{ teacher.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>

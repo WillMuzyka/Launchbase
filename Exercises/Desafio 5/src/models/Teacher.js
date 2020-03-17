@@ -1,15 +1,15 @@
 const db = require('../config/db')
 
-const errorCheck = err => { if (err) throw `Database Error! ${err}` }
-
 module.exports = {
 	all(callback) {
 		const query = `
-			SELECT *
+			SELECT teachers.*, count(students) students
 			FROM teachers
+			LEFT JOIN students ON (teachers.id = students.teacher_id)
+			GROUP BY teachers.id
 			ORDER BY name`
 		db.query(query, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database Error! ${err}`
 			callback(results.rows)
 		})
 	},
@@ -27,7 +27,7 @@ module.exports = {
 		RETURNING	id`
 
 		db.query(query, values, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database Error! ${err}`
 			callback()
 		})
 	},
@@ -37,8 +37,22 @@ module.exports = {
 		FROM teachers
 		WHERE id = $1`
 		db.query(query, [id], (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database Error! ${err}`
 			callback(results.rows[0])
+		})
+	},
+	findBy(filter, callback) {
+		const query = `
+			SELECT teachers.*, count(students) students
+			FROM teachers
+			LEFT JOIN students ON (teachers.id = students.teacher_id)
+			WHERE teachers.name ILIKE '%${filter}%'
+			OR teachers.subjects_taught ILIKE '%${filter}%'
+			GROUP BY teachers.id
+			ORDER BY name`
+		db.query(query, (err, results) => {
+			if (err) throw `Database Error! ${err}`
+			callback(results.rows)
 		})
 	},
 	update(values, callback) {
@@ -54,7 +68,7 @@ module.exports = {
 		WHERE id = $7`
 
 		db.query(query, values, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database Error! ${err}`
 			callback()
 		})
 	},
@@ -65,7 +79,7 @@ module.exports = {
 		WHERE id = $1`
 
 		db.query(query, [id], (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database Error! ${err}`
 			callback()
 		})
 	}

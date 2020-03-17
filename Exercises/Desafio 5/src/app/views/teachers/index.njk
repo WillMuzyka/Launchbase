@@ -2,12 +2,19 @@
 
 {% block content %}
   <div class="card table-container">
-    <a href="/teachers/create">Novo Professor</a>
+    <div class="header">
+      <a class="newButton" href="/teachers/create">Novo Professor</a>
+      <form action="/teachers" method="GET">
+        <input value="{{ filter }}" name="filter" type="text" placeholder="Nome ou Acompanhamento...">
+        <button type="submit">Filtrar</button>
+      </form>
+    </div>
     <table>
       <thead>
         <tr>
           <th>Nome</th>
           <th>Acompanhamentos</th>
+          <th>Estudantes</th>
           <th>Ação</th>
         </tr>
       </thead>
@@ -21,6 +28,9 @@
           {% for subject in teacher.subjects_taught %}
             <span class="subject">{{  subject  }}</span>
           {% endfor %}
+          </td>
+          <td>
+            <span class="students">{{  teacher.students  }}</span>
           </td>
           <td>
             <a href="/teachers/{{ teacher.id }}">Visualizar</a>

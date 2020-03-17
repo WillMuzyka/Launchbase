@@ -22,8 +22,9 @@ module.exports = {
 			email,
 			school_year,
 			credits,
-			created_at)
-		VALUES ($1, $2, $3, $4, $5, $6, $7)
+			created_at,
+			teacher_id)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 		RETURNING	id`
 
 		db.query(query, values, (err, results) => {
@@ -33,12 +34,25 @@ module.exports = {
 	},
 	find(id, callback) {
 		const query = `
-		SELECT *
+		SELECT students.*, teachers.name teacher_name, teachers.id teacher_id
 		FROM students
-		WHERE id = $1`
+		LEFT JOIN teachers ON (students.teacher_id = teachers.id)
+		WHERE students.id = $1`
 		db.query(query, [id], (err, results) => {
 			errorCheck(err)
 			callback(results.rows[0])
+		})
+	},
+	findBy(filter, callback) {
+		const query = `
+			SELECT students.*
+			FROM students
+			WHERE students.name ILIKE '%${filter}%'
+			OR students.school_year ILIKE '%${filter}%'
+			ORDER BY name`
+		db.query(query, (err, results) => {
+			if (err) throw `Database Error! ${err}`
+			callback(results.rows)
 		})
 	},
 	update(values, callback) {
@@ -50,8 +64,9 @@ module.exports = {
 			birth = ($3),
 			email = ($4),
 			school_year = ($5),
-			credits = ($6)
-		WHERE id = $7`
+			credits = ($6),
+			teacher_id = ($7)
+		WHERE id = $8`
 
 		db.query(query, values, (err, results) => {
 			errorCheck(err)
@@ -67,6 +82,13 @@ module.exports = {
 		db.query(query, [id], (err, results) => {
 			errorCheck(err)
 			callback()
+		})
+	},
+	teacherOptions(callback) {
+		const query = `SELECT name, id FROM teachers ORDER BY name`
+		db.query(query, (err, results) => {
+			errorCheck(err)
+			callback(results.rows)
 		})
 	}
 }

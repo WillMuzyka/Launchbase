@@ -2,7 +2,13 @@
 
 {% block content %}
   <div class="card table-container">
-    <a href="/students/create">Novo Aluno</a>
+    <div class="header">
+      <a class="newButton" href="/students/create">Novo Aluno</a>
+      <form action="/students" method="GET">
+        <input value ="{{ filter }}" name="filter" type="text" placeholder="Nome ou ano (ex.: 1 => 1º ano)...">
+        <button type="submit">Filtrar</button>
+      </form>
+    </div>
     <table id="student">
       <thead>
         <tr>
@@ -18,7 +24,9 @@
           <td>
             <span class="avatar" style="background-image: url({{ student.avatar_url }})"></span>
           {{  student.name  }}</td>
-          <td>{{ student.school_year }}</td>
+          <td >
+            <div class="school_year">{{ student.school_year }}</div>
+          </td>
           <td>{{ student.email }}</td>
           <td>
             <a href="/students/{{ student.id }}">Visualizar</a>
