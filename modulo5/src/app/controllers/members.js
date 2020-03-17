@@ -6,17 +6,26 @@ const errorINF = "Member not found!"
 
 module.exports = {
 	index(req, res) {
-		const { filter } = req.query
-		if (filter) {
-			Member.findBy(filter, members => {
-				return res.render("members/index", { members })
-			})
-		} else {
-			Member.all(members => {
-				return res.render("members/index", { members })
-			})
+		let { filter, page, limit } = req.query
+		page = page || 1
+		limit = limit || 4
+
+		const params = {
+			filter,
+			limit,
+			offset: limit * (page - 1),
 		}
 
+		Member.paginate(params, members => {
+			let totalPages = 0
+			if (members[0]) totalPages = Math.ceil(members[0].total / limit)
+
+			const pages = {
+				total: totalPages,
+				page
+			}
+			return res.render("members/index", { members, filter, pages })
+		})
 	},
 	create(req, res) {
 		Member.instructorOptions(options => res.render("members/create", { instructorOptions: options }))
@@ -45,6 +54,8 @@ module.exports = {
 			//calculate the age and format the create_at date
 			member.age = calcAge(member.birth)
 			member.created_at = date(member.created_at).format
+			member.id = req.params.id
+
 			return res.render("members/show", { member })
 		})
 	},
@@ -55,11 +66,12 @@ module.exports = {
 
 			//set the date
 			member.birth = date(member.birth).iso
+			member.id = req.params.id
 
 			Member.instructorOptions(options => res.render("members/edit", { member, instructorOptions: options }))
 		})
 	},
-	update(req, res) {
+	put(req, res) {
 		//avatar_url, name, email, birth, gender, blood, weight, height, id
 		const values = [
 			req.body.avatar_url,

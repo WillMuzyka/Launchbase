@@ -202,9 +202,10 @@ a.newButton {
 
 /* INDEX INSTRUCTORS */
 .table-container {
-	display: block;
 	padding: 40px;
 	box-sizing: border-box;
+	display: grid;
+	grid-template: 64px 1fr 16px / 1fr;
 }
 
 table {
@@ -307,4 +308,28 @@ table#member th {
 	border: 1px solid #DDD;
 	line-height: 26px;
 	padding: 4px 8px;
+}
+
+/* PAGINATION */
+.table-container .header {
+	align-self: flex-start;
+}
+
+.table-container .pagination {
+	align-self: flex-end;
+	justify-self: center;
+}
+
+.pagination a,
+.pagination span {
+	margin-right: 12px;
+	text-decoration: none;
+	color: var(--color-rocket);
+	padding: 2px 4px
+}
+
+.pagination a:hover {
+	filter: brightness(0.5);
+	font-weight: bold;
+	border-bottom: 1px solid var(--color-rocket);
 }

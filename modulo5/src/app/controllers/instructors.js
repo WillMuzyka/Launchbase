@@ -6,26 +6,31 @@ const errorINF = "Instructor not found!"
 
 module.exports = {
 	index(req, res) {
-		const { filter } = req.query
-		if (filter) {
-			Instructor.findBy(filter, instructors => {
-				//separate each service to show
-				instructors = instructors.map(instructor => {
-					instructor.services = instructor.services.split(",")
-					return instructor
-				})
-				return res.render("instructors/index", { instructors, filter })
-			})
-		} else {
-			Instructor.all(instructors => {
-				//separate each service to show
-				instructors = instructors.map(instructor => {
-					instructor.services = instructor.services.split(",")
-					return instructor
-				})
-				return res.render("instructors/index", { instructors })
-			})
+		let { filter, page, limit } = req.query
+		page = page || 1
+		limit = limit || 4
+
+		const params = {
+			filter,
+			limit,
+			offset: limit * (page - 1),
 		}
+
+		Instructor.paginate(params, instructors => {
+			instructors = instructors.map(instructor => {
+				instructor.services = instructor.services.split(",")
+				return instructor
+			})
+
+			let totalPages = 0
+			if (instructors[0]) totalPages = Math.ceil(instructors[0].total / limit)
+
+			const pages = {
+				total: totalPages,
+				page
+			}
+			return res.render("instructors/index", { instructors, filter, pages })
+		})
 	},
 	create(req, res) {
 		res.render("instructors/create")

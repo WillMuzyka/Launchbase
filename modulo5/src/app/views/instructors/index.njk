@@ -40,5 +40,13 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <div class="pagination"
+      data-total={{pages.total}}
+      data-page={{pages.page}}
+      data-filter={{filter}}>
+    </div>
   </div>
+
+  <script src="/scripts/paginate.js"></script>
 {% endblock %}

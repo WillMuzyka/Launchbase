@@ -1,16 +1,12 @@
 const db = require('../config/db')
 
-const errorCheck = (err) => {
-	if (err) throw `Database error! ${err}`
-}
-
 module.exports = {
 	all(callback) {
 		db.query(`
 		SELECT *
 		FROM members
 		ORDER BY name`, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback(results.rows)
 		})
 	},
@@ -30,7 +26,7 @@ module.exports = {
 		RETURNING id`
 
 		db.query(query, values, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback(results.rows[0])
 		})
 	},
@@ -41,8 +37,7 @@ module.exports = {
 			WHERE members.id=$1`
 
 		db.query(query, [id], (err, results) => {
-			errorCheck(err)
-			console.log(results.rows[0])
+			if (err) throw `Database error! ${err}`
 			return callback(results.rows[0])
 		})
 	},
@@ -62,7 +57,7 @@ module.exports = {
 			WHERE id = $10`
 
 		db.query(query, values, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback()
 		})
 	},
@@ -73,14 +68,39 @@ module.exports = {
 			WHERE id = $1`
 
 		db.query(query, [id], (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback()
 		})
 	},
 	instructorOptions(callback) {
 		const query = `SELECT name, id FROM instructors`
 		db.query(query, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
+			callback(results.rows)
+		})
+	},
+	paginate(params, callback) {
+		const { filter, limit, offset } = params
+		let filterQuery = ""
+
+		if (filter) {
+			filterQuery = `WHERE name ILIKE '%${filter}%'`
+		}
+
+		const totalQuery = `(
+		SELECT count(*)
+		FROM members
+		${filterQuery}) total`
+
+		const query = `
+		SELECT *, ${totalQuery}
+		FROM members
+		${filterQuery}
+		ORDER BY name
+		LIMIT ${limit} OFFSET ${offset}`
+
+		db.query(query, (err, results) => {
+			if (err) throw `Database error! ${err}`
 			callback(results.rows)
 		})
 	}

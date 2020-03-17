@@ -1,9 +1,5 @@
 const db = require('../config/db')
 
-const errorCheck = (err) => {
-	if (err) throw `Database error! ${err}`
-}
-
 module.exports = {
 	all(callback) {
 		db.query(`
@@ -12,7 +8,7 @@ module.exports = {
 		LEFT JOIN members ON (instructors.id = members.instructor_id)
 		GROUP BY instructors.id
 		ORDER BY students DESC`, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback(results.rows)
 		})
 	},
@@ -28,7 +24,7 @@ module.exports = {
 		RETURNING id`
 
 		db.query(query, values, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback(results.rows[0])
 		})
 	},
@@ -39,7 +35,7 @@ module.exports = {
 			WHERE id=$1`
 
 		db.query(query, [id], (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback(results.rows[0])
 		})
 	},
@@ -52,7 +48,7 @@ module.exports = {
 		OR instructors.services ILIKE '%${filter}%'
 		GROUP BY instructors.id
 		ORDER BY students DESC`, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback(results.rows)
 		})
 	},
@@ -68,7 +64,7 @@ module.exports = {
 			WHERE id = $6`
 
 		db.query(query, values, (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback()
 		})
 	},
@@ -79,8 +75,35 @@ module.exports = {
 			WHERE id = $1`
 
 		db.query(query, [id], (err, results) => {
-			errorCheck(err)
+			if (err) throw `Database error! ${err}`
 			return callback()
+		})
+	},
+	paginate(params, callback) {
+		const { filter, limit, offset } = params
+		let filterQuery = ""
+
+		if (filter) {
+			filterQuery = `
+			WHERE instructors.name ILIKE '%${filter}%'
+			OR instructors.services ILIKE '%${filter}%'`
+		}
+
+		const totalQuery = `(
+		SELECT count(*)
+		FROM instructors
+		${filterQuery}) total`
+
+		const query = `
+		SELECT instructors.*, ${totalQuery}, count(members) students
+		FROM instructors
+		LEFT JOIN members ON (instructors.id = members.instructor_id)
+		${filterQuery}
+		GROUP BY instructors.id LIMIT ${limit} OFFSET ${offset}`
+
+		db.query(query, (err, results) => {
+			if (err) throw `Database error! ${err}`
+			callback(results.rows)
 		})
 	}
 }
