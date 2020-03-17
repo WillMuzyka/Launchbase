@@ -6,15 +6,26 @@ const errorINF = "Instructor not found!"
 
 module.exports = {
 	index(req, res) {
-		Instructor.all(instructors => {
-			//separate each service to show
-			instructors = instructors.map(instructor => {
-				instructor.services = instructor.services.split(",")
-				return instructor
+		const { filter } = req.query
+		if (filter) {
+			Instructor.findBy(filter, instructors => {
+				//separate each service to show
+				instructors = instructors.map(instructor => {
+					instructor.services = instructor.services.split(",")
+					return instructor
+				})
+				return res.render("instructors/index", { instructors, filter })
 			})
-
-			return res.render("instructors/index", { instructors })
-		})
+		} else {
+			Instructor.all(instructors => {
+				//separate each service to show
+				instructors = instructors.map(instructor => {
+					instructor.services = instructor.services.split(",")
+					return instructor
+				})
+				return res.render("instructors/index", { instructors })
+			})
+		}
 	},
 	create(req, res) {
 		res.render("instructors/create")

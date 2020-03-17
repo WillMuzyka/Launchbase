@@ -57,6 +57,20 @@
 </div>
 
 <div class="item">
+  <div>Instrutor</div>
+  <div>
+    <select required name="instructor">
+      <option value="" selected disable hidden>Selecione uma opção</option>
+      {% for instructor in instructorOptions %}
+        <option value="{{ instructor.id }}" {% if member.instructor_id == instructor.id %}selected{% endif %}>
+          {{ instructor.name }}
+        </option>s
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+<div class="item">
   <div>Peso</div>
   <div>
     <input required type="number" name="weight" placeholder="Em kg" value="{{ member.weight }}">

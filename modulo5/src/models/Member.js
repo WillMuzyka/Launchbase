@@ -1,12 +1,16 @@
 const db = require('../config/db')
 
+const errorCheck = (err) => {
+	if (err) throw `Database error! ${err}`
+}
+
 module.exports = {
 	all(callback) {
 		db.query(`
 		SELECT *
 		FROM members
 		ORDER BY name`, (err, results) => {
-			if (err) throw `Database error! ${err}`
+			errorCheck(err)
 			return callback(results.rows)
 		})
 	},
@@ -20,23 +24,25 @@ module.exports = {
 			blood,
 			weight,
 			height,
+			instructor_id,
 			created_at
-		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 		RETURNING id`
 
 		db.query(query, values, (err, results) => {
-			if (err) throw `Database error! ${err}`
+			errorCheck(err)
 			return callback(results.rows[0])
 		})
 	},
 	find(id, callback) {
 		const query = `
-			SELECT *
-			FROM members
-			WHERE id=$1`
+			SELECT members.*, instructors.name instructor_name, instructors.id FROM members
+			LEFT JOIN instructors ON (members.instructor_id = instructors.id)
+			WHERE members.id=$1`
 
 		db.query(query, [id], (err, results) => {
-			if (err) throw `Database error! ${err}`
+			errorCheck(err)
+			console.log(results.rows[0])
 			return callback(results.rows[0])
 		})
 	},
@@ -51,11 +57,12 @@ module.exports = {
 				gender = ($5),
 				blood = ($6),
 				weight = ($7),
-				height = ($8)
-			WHERE id = $9`
+				height = ($8),
+				instructor_id = ($9)
+			WHERE id = $10`
 
 		db.query(query, values, (err, results) => {
-			if (err) throw `Database error! ${err}`
+			errorCheck(err)
 			return callback()
 		})
 	},
@@ -66,8 +73,15 @@ module.exports = {
 			WHERE id = $1`
 
 		db.query(query, [id], (err, results) => {
-			if (err) throw `Database error! ${err}`
+			errorCheck(err)
 			return callback()
+		})
+	},
+	instructorOptions(callback) {
+		const query = `SELECT name, id FROM instructors`
+		db.query(query, (err, results) => {
+			errorCheck(err)
+			callback(results.rows)
 		})
 	}
 }

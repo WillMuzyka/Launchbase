@@ -176,7 +176,8 @@ input::placeholder {
 }
 
 button[type="submit"],
-.details a.editButton {
+a.editButton,
+a.newButton {
 	padding: 8px 32px;
 	background-color: var(--color-rocket);
 	border-radius: 4px;
@@ -185,6 +186,7 @@ button[type="submit"],
 	color: white;
 	font-size: 16px;
 	font-weight: bold;
+	text-decoration: none;
 }
 
 .details a.editButton {
@@ -271,10 +273,38 @@ tbody td:last-child a,
 }
 
 table#member th,
-table#member td {
+table#member td,
+td#students {
 	text-align: center;
 }
 
 table#member th {
 	padding-left: 16px;
+}
+
+/* FILTER */
+.table-container .header {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+}
+
+.table-container .header form {
+	display: grid;
+	grid-template-columns: 1fr 120px;
+	align-items: center;
+	grid-gap: 8px;
+}
+
+.table-container .header a.newButton,
+.table-container .header button {
+	margin: 0;
+	width: 120px;
+	text-align: center;
+}
+
+.table-container .header input {
+	border: 1px solid #DDD;
+	line-height: 26px;
+	padding: 4px 8px;
 }

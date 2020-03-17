@@ -2,12 +2,19 @@
 
 {% block content %}
   <div class="card table-container">
-    <a href="/instructors/create">Novo Instrutor</a>
+    <div class="header">
+      <a class="newButton" href="/instructors/create">Novo Instrutor</a>
+      <form action="/instructors" class="filter" method="GET">
+        <input type="text" name="filter" value="{{ filter }}" placeholder="Nome ou Atendimento...">
+        <button type="submit">Filtrar</button>
+      </form>
+    </div>
     <table width="100%">
       <thead>
         <tr>
           <th>Instrutor</th>
           <th>Atendimento</th>
+          <th>Alunos</th>
           <th>Ação</th>
         </tr>
       </thead>
@@ -22,6 +29,9 @@
               {% for service in instructor.services %}
                 <span id="service">{{ service }}</span>
               {% endfor %}
+            </td>
+            <td id="students">
+              <span>{{ instructor.students }}</span>
             </td>
             <td>
               <a href="instructors/{{ instructor.id }}">Visualizar</a>
