@@ -6,24 +6,32 @@ module.exports = {
 		Student.teacherOptions(teacherOptions => res.render("students/create", { teacherOptions }))
 	},
 	index: (req, res) => {
-		const { filter } = req.query
-		if (filter) {
-			Student.findBy(filter, students => {
-				students = students.map(student => {
-					student.school_year = showGrade(student.school_year)
-					return student
-				})
-				res.render("students/index", { students, filter })
-			})
-		} else {
-			Student.all(students => {
-				students = students.map(student => {
-					student.school_year = showGrade(student.school_year)
-					return student
-				})
-				res.render("students/index", { students })
-			})
+		let { filter, page, limit } = req.query
+
+		page = page || 1
+		limit = limit || 4
+		offset = limit * (page - 1)
+
+		const params = {
+			filter,
+			offset,
+			limit
 		}
+
+		Student.paginate(params, students => {
+			students = students.map(student => {
+				student.school_year = showGrade(student.school_year)
+				return student
+			})
+
+			let total = 0
+			if (students[0]) total = Math.ceil(students[0].total / limit)
+			pages = {
+				page,
+				total
+			}
+			return res.render("students/index", { students, filter, pages })
+		})
 	},
 	post: (req, res) => {
 		const values = [

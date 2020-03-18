@@ -23,14 +23,14 @@
         <tr>
           <td>
             <span class="avatar" style="background-image: url({{ teacher.avatar_url }})"></span>
-          {{  teacher.name  }}</td>
+          {{ teacher.name }}</td>
           <td>
           {% for subject in teacher.subjects_taught %}
-            <span class="subject">{{  subject  }}</span>
+            <span class="subject">{{ subject }}</span>
           {% endfor %}
           </td>
           <td>
-            <span class="students">{{  teacher.students  }}</span>
+            <span class="students">{{ teacher.students }}</span>
           </td>
           <td>
             <a href="/teachers/{{ teacher.id }}">Visualizar</a>
@@ -39,6 +39,11 @@
       {% endfor %}
       </tbody>
     </table>
+    <div class="pagination"
+    data-page={{ pages.page }}
+    data-total={{ pages.total }}
+    data-filter={{ filter }}>
+    </div>
   </div>
-
+  <script src="/scripts/paginate.js"></script>
 {% endblock %}

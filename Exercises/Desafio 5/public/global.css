@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
 :root {
-	--color-rocket: #41b3a3;
+	--color-primary: #41b3a3;
 	--color-button: #fcd0af;
 	--color-especial-button: #85dcba;
 	--color-delete-button: #e27d60;
@@ -17,7 +17,7 @@
 }
 
 body {
-	background-color: var(--color-rocket);
+	background-color: var(--color-primary);
 	font-family: 'Roboto', sans-serif;
 	color: var(--color-letter-black);
 }
@@ -47,18 +47,18 @@ header .links a+a {
 
 header .links a.active {
 	font-weight: bold;
-	color: var(--color-rocket);
+	color: var(--color-primary);
 }
 
 header .links a:hover {
-	color: var(--color-rocket);
+	color: var(--color-primary);
 }
 
 .links a::after {
 	content: "";
 	width: 0;
 	height: 2px;
-	background-color: var(--color-rocket);
+	background-color: var(--color-primary);
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0);
@@ -74,8 +74,8 @@ header .links a:hover {
 /* CARD */
 .card {
 	background-color: white;
-	min-height: 500px;
 	width: 1000px;
+	min-height: 400px;
 	overflow: hidden;
 	margin: 40px auto;
 	font-size: 20px;
@@ -134,6 +134,21 @@ select,
 	}
 }
 
+/* ERROR MESSAGE */
+.error-card {
+	display: block;
+	text-align: center;
+}
+
+.error-card .error-content {
+	padding: 16px;
+}
+
+.error-card .error-content img {
+	max-width: 400px;
+	max-height: 400px;
+}
+
 /* FORM */
 input {
 	width: 100%;
@@ -173,13 +188,14 @@ a.newButton {
 	text-align: center;
 	font-size: 20px;
 	line-height: 30px;
-	background-color: var(--color-rocket);
+	background-color: var(--color-primary);
 	color: white;
 	padding: 8px 16px;
 	border-radius: 8px;
 	margin-top: 8px;
 	width: 100%;
 	cursor: pointer;
+	box-shadow: 4px 2px 6px -4px black;
 }
 
 a.editButton {
@@ -214,7 +230,8 @@ a.newButton {
 
 /* INDEX TABLE */
 .table-container {
-	display: block;
+	display: grid;
+	grid-template: 64px 1fr 16px / 1fr;
 	padding: 40px;
 	box-sizing: border-box;
 }
@@ -245,7 +262,7 @@ td:not(:first-child) {
 td:last-child a,
 td .subject,
 td .school_year {
-	background-color: var(--color-rocket);
+	background-color: var(--color-primary);
 	padding: 8px 16px;
 	border-radius: 4px;
 	text-decoration: none;
@@ -309,4 +326,36 @@ td .avatar {
 	line-height: 26px;
 	border: 1px solid #DDD;
 	padding: 8px 8px;
+}
+
+/* PAGINATION */
+.header {
+	align-items: flex-start;
+}
+
+.pagination {
+	align-self: flex-end;
+	justify-self: center;
+}
+
+.pagination a,
+.pagination span {
+	margin-right: 16px;
+	padding: 2px;
+	text-decoration: none;
+	color: var(--color-primary);
+}
+
+.pagination a:last-child {
+	margin-right: 0;
+}
+
+.pagination a:hover {
+	border-bottom: 1px solid var(--color-primary);
+	filter: brightness(0.4);
+}
+
+.pagination a.active {
+	filter: brightness(0.7);
+	font-weight: bold;
 }

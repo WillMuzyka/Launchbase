@@ -90,5 +90,29 @@ module.exports = {
 			errorCheck(err)
 			callback(results.rows)
 		})
-	}
+	},
+	paginate(params, callback) {
+		const { filter, offset, limit } = params
+		let filterQuery = ""
+		if (filter) {
+			filterQuery = `
+			WHERE students.name ILIKE '%${filter}%'
+			OR students.school_year ILIKE '%${filter}%'`
+		}
+		const totalQuery = `
+		(SELECT count(*)
+		FROM students
+		${filterQuery}) total`
+
+		const query = `
+		SELECT students.*, ${totalQuery}
+		FROM students
+		${filterQuery}
+		ORDER BY name LIMIT ${limit} OFFSET ${offset}`
+
+		db.query(query, (err, results) => {
+			if (err) throw `Database Error! ${err}`
+			callback(results.rows)
+		})
+	},
 }

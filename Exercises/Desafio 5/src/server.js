@@ -9,6 +9,7 @@ server.use(express.urlencoded({ extended: true }))
 server.use(express.static("public"))
 server.use(methodOverride("_method"))
 server.use(routes)
+server.use((req, res) => res.status(404).render("notFound"))
 
 server.set("view engine", "njk")
 

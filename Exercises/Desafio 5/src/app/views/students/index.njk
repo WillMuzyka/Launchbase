@@ -5,7 +5,7 @@
     <div class="header">
       <a class="newButton" href="/students/create">Novo Aluno</a>
       <form action="/students" method="GET">
-        <input value ="{{ filter }}" name="filter" type="text" placeholder="Nome ou ano (ex.: 1 => 1º ano)...">
+        <input value ="{{ filter }}" name="filter" type="text" placeholder="Nome ou ano (M1 => Médio 1º; F8 => Fund. 8º)...">
         <button type="submit">Filtrar</button>
       </form>
     </div>
@@ -35,6 +35,12 @@
       {% endfor %}
       </tbody>
     </table>
+  <div class="pagination"
+    data-page={{ pages.page }}
+    data-total={{ pages.total }}
+    data-filter={{ filter }}>
+    </div>
   </div>
+  <script src="/scripts/paginate.js"></script>
 
 {% endblock %}
