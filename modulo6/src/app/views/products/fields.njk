@@ -37,7 +37,37 @@
   </div>
 </div>
 
-{# Campo de Foto #}
+<div class="item">
+  <div>Fotos</div>
+  <div>
+    <div id="photos-upload">
+      <input
+        id="photos-input"
+        type="file"
+        name="photos"
+        multiple
+        accept="image/*"
+        onchange="PhotosUpload.handleFileInput(event)"
+      >
+      <p>Selecione até 6 fotos</p>
+    </div>
+    <div id="photos-preview">
+    {% if files %}
+      {% for image in files %}
+        <div class="photo" id="{{ image.id }}">
+          <img src="{{ image.src }}" alt="{{ image.name }}">
+          <i class="material-icons"
+            onclick="PhotosUpload.removeOldPhoto(event)"
+          >
+          delete_forever
+          </i>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <input type="hidden" name="deleted_id" value="">
+    </div>
+  </div>
+</div>
 
 <div class="item">
   <div>Valor</div>
@@ -92,5 +122,3 @@
   </div>
 </div>
 {% endif %}
-
-<script src="/scripts/masks.js"></script>

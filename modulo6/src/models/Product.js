@@ -31,13 +31,15 @@ module.exports = {
 			old_price = ($5),
 			price = ($6),
 			quantity = ($7),
-			status = ($8),
-			updated = ($9)
-		WHERE id = $10`
+			status = ($8)
+		WHERE id = $9`
 
 		db.query(query, values)
 	},
 	delete(id) {
 		return db.query(`DELETE FROM products WHERE id = $1`, [id])
 	},
+	files(id) {
+		return db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
+	}
 }
