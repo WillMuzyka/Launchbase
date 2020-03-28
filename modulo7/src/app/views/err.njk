@@ -1,0 +1,12 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+  <div class="card err">
+    <div class="err-info">
+      <h1>A página solicitada não pode ser exibida!</h1>
+      <p>Por favor, verifique o URL ou tente novamente mais tarde.</p>
+      <img src="/err.png" alt="">
+      <p class="err-type">Mensagem de erro: {{ errorText }}</p>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+<!DOCTYPE>
+<html>
+
+  <head>
+
+    <link rel="stylesheet" href="/global.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% block videos_css %}
+      <title>Launchstore</title>
+    {% endblock %}
+
+  </head>
+
+  <body>
+    {% include "parts/header.njk" %}
+    {% block content %}{% endblock %}
+    {% include "parts/footer.njk" %}
+  </body>
+  
+  <script src="/scripts/scripts.js"></script>
+</html>
