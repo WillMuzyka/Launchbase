@@ -1,2 +1,2 @@
-# Module 4
-In this module the project was making a web-site with users and admins.
+# Module 6
+In this module the project was making a web store, with products, search, user login and more.
