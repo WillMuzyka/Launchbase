@@ -9,7 +9,25 @@ const Mask = {
 			style: "currency",
 			currency: "BRL"
 		}).format(value.replace(/\D/g, '') / 100)
-	}
+	},
+	cpfCnpj(value) {
+		value = value.replace(/\D/g, "")
+		if (value.length > 14) value = value.slice(0, -1)
+
+		if (value.length > 11) {
+			value = value
+				.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d)/, "$1.$2.$3/$4-$5")
+		} else {
+			value = value
+				.replace(/(\d{3})(\d{3})(\d{3})(\d)/, "$1.$2.$3-$4")
+		}
+		return value
+	},
+	cep(value) {
+		value = value.replace(/\D/g, "")
+		if (value.length > 8) value = value.slice(0, -1)
+		return value.replace(/(\d{5})(\d)/, "$1-$2")
+	},
 }
 
 const PhotosUpload = {
@@ -145,4 +163,94 @@ const Lightbox = {
 		Lightbox.target.style.bottom = "initial"
 		Lightbox.closeButton.style.top = "-80px"
 	}
+}
+
+const Validate = {
+	apply(input, func) {
+		Validate.clearErrors(input)
+
+		let results = Validate[func](input.value)
+		input.value = results.value
+
+		if (results.error)
+			Validate.displayError(input, results.error, results.focus)
+	},
+	displayError(input, error, focus) {
+		const div = document.createElement("div")
+		div.classList.add("error")
+		div.innerHTML = error
+		input.parentNode.appendChild(div)
+		if (focus)
+			input.focus()
+	},
+	clearErrors(input) {
+		const errorDiv = input.parentElement.querySelector(".error")
+		if (errorDiv)
+			errorDiv.remove()
+	},
+	isEmail(value) {
+		let error = null
+		//wasdasd-asds.asdas@
+		const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+		if (!value.match(mailFormat))
+			error = "E-mail inválido"
+
+		return {
+			error,
+			value,
+			focus: true
+		}
+	},
+	isCpfCnpj(value) {
+		let error = null
+		const cleanValue = value.replace(/\D/g, "")
+
+		if (cleanValue.length > 11 && cleanValue.length != 14)
+			error = "CPNJ inválido"
+		else if (cleanValue.length < 12 && cleanValue.length != 11)
+			error = "CPF inválido"
+
+		return {
+			error,
+			value,
+			focus: true
+		}
+	},
+	isCep(value) {
+		let error = null
+		const cleanValue = value.replace(/\D/g, "")
+
+		if (cleanValue.length != 8)
+			error = "CEP inválido"
+
+		return {
+			error,
+			value,
+			focus: true
+		}
+	},
+	isFullName(value) {
+		let error = null
+		const nameFormat = /^\w+(\s\w+)*\s\w+$/
+		if (!value.match(nameFormat))
+			error = "Insira seu nome completo"
+
+		return {
+			error,
+			value,
+			focus: true
+		}
+	},
+	isMatching(value) {
+		let error = null
+		const nameFormat = /^\w+(\s\w+)*\s\w+$/
+		if (!value.match(nameFormat))
+			error = "Insira seu nome completo"
+
+		return {
+			error,
+			value,
+			focus: false
+		}
+	},
 }

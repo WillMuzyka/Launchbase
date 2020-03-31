@@ -1,5 +1,5 @@
 {
-	"name": "modulo6",
+	"name": "modulo7",
 	"version": "1.0.0",
 	"description": "",
 	"main": "src/server.js",
@@ -11,6 +11,7 @@
 	},
 	"author": "William Muzyka Oyarzabal Nunes",
 	"dependencies": {
+		"bcryptjs": "^2.4.3",
 		"express": "^4.17.1",
 		"method-override": "^3.0.0",
 		"multer": "^1.4.2",

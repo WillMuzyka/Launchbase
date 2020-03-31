@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
-
 :root {
 	--primary-color: #fd951f;
 	--secondary-color: #1f5afd;
@@ -94,6 +92,17 @@ textarea {
 	background-color: var(--hover-secondary-color);
 }
 
+@keyframes slide-down {
+	0% {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
 /* ~~ HEADER ~~ */
 
@@ -163,6 +172,25 @@ header nav.primary ul li a i {
 	margin-right: 8px;
 }
 
+/* ERROR PAGE */
+.card.err {
+	margin: 32px 0;
+}
+
+.card.err .err-info {
+	text-align: center;
+}
+
+.card.err p {
+	font-size: 14px;
+	color: #777;
+}
+
+.card.err img {
+	max-width: 300px;
+	max-height: 300px;
+}
+
 /* ~~ PRODUCT FORM ~~ */
 section.form {
 	background-color: white;
@@ -202,6 +230,7 @@ form .item>div:nth-child(1) {
 	margin-bottom: 8px;
 }
 
+.form .item .input input,
 .form .item input[type="text"],
 .form .item input[type="number"],
 .form .item textarea,
@@ -236,6 +265,7 @@ form .item>div:nth-child(1) {
 
 .form .item select option {
 	color: black;
+	text-transform: capitalize;
 }
 
 .form .item textarea {
@@ -566,4 +596,29 @@ form .item>div:nth-child(1) {
 .search-products nav ul li a:hover {
 	color: black;
 	font-weight: bold;
+}
+
+
+/* USER REGISTER */
+.user-register.container.form {
+	max-width: 500px;
+}
+
+.form .input.small input,
+.form .input.small .error {
+	max-width: 60%;
+}
+
+/* VALIDATE ERRORS */
+.input .error {
+	background-color: #e74c3c;
+	margin-top: 2px;
+	padding: 8px 16px;
+	border-radius: 4px;
+	color: #fff;
+
+	box-shadow: 2px 2px 2px -2px rgba(60, 60, 60, 0.9);
+	border: 1px solid #e02041;
+
+	animation: slide-down 0.3s ease;
 }

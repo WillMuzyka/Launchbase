@@ -12,6 +12,12 @@ module.exports = {
 		return res.render("products/create", { categories })
 	},
 	async post(req, res) {
+		const keys = Object.keys(req.body)
+		for (key of keys) {
+			if (req.body[key] == "")
+				return res.send("Please fill all fields!")
+		}
+
 		const price = req.body.price.replace(/\D/g, '')
 		const values = [
 			req.body.category_id,
@@ -82,6 +88,12 @@ module.exports = {
 		return res.render("products/edit", { product, categories, files })
 	},
 	async put(req, res) {
+		const keys = Object.keys(req.body)
+		for (key of keys) {
+			if (req.body[key] == "")
+				return res.send("Please fill all fields!")
+		}
+
 		let { old_price, deleted_id } = req.body
 		const price = req.body.price.replace(/\D/g, '')
 

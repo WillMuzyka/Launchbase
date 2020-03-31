@@ -1,2 +1,3 @@
-# Module 4
-In this module the project was making a web-site with users and admins.
+# Module 7
+
+	This module is an extension from the module 6, adding more funcionalities, like user login, session and more.
