@@ -37,14 +37,16 @@ CREATE TABLE "users"(
   "cpf_cnpj" bigint UNIQUE NOT NULL,
   "cep" text,
   "address" text,
+	"reset_token" text,
+	"reset_token_expires" text,
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp DEFAULT (now())
 );
 
 -- foreign keys
 ALTER TABLE "products" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
-ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-ALTER TABLE "files" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
+ALTER TABLE "files" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id") ON DELETE CASCADE;
 
 -- create procedures
 CREATE FUNCTION trigger_set_timestamp()
@@ -72,3 +74,13 @@ INSERT INTO categories(name) VALUES ('Eletrônicos');
 INSERT INTO categories(name) VALUES ('Automóveis');
 INSERT INTO categories(name) VALUES ('Lazer');
 INSERT INTO categories(name) VALUES ('Livros');
+
+-- connection pg simple table
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+	"sess" json NOT NULL,
+	"expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+CREATE INDEX "IDX_session_expire" ON "session" ("expire");

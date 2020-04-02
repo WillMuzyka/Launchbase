@@ -35,7 +35,7 @@
       {% endif %}
       type="password"
       name="password"
-      placeholder="Digite sua senha"
+      placeholder="{{ 'Digite sua senha para atualizar o cadastro' if user.id else 'Digite uma senha segura'}}"
     >
   </div>
 </div>

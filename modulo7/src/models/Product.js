@@ -64,5 +64,8 @@ module.exports = {
 			${filterQuery}`
 
 		return db.query(query)
+	},
+	getByUser(user_id) {
+		return db.query(`SELECT * FROM products	WHERE user_id = $1`, [user_id])
 	}
 }
