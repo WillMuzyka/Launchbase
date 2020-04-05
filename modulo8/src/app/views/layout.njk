@@ -1,0 +1,19 @@
+<!DOCTYPE>
+<html>
+
+  <head>
+    {% block videos_css %}
+      <title>Launchstore</title>
+    {% endblock %}
+    {% include "parts/styles.njk" %}
+  </head>
+
+  <body>
+    {% include "parts/messages.njk"%}
+    {% include "parts/header.njk" %}
+    {% block content %}{% endblock %}
+    {% include "parts/footer.njk" %}
+  </body>
+  
+  <script src="/scripts/scripts.js"></script>
+</html>

@@ -1,0 +1,98 @@
+<div class="item">
+  <div>Nome</div>
+  <div class="input">
+    <input
+      required
+      type="text"
+      name="name"
+      placeholder="Digite seu nome completo"
+      value="{{ user.name }}"
+      onblur="Validate.apply(this, 'isFullName')"
+    >
+  </div>
+</div>
+
+<div class="item">
+  <div>Email</div>
+  <div class="input small">
+    <input
+      required
+      type="email"
+      name="email"
+      placeholder="Digite seu email"
+      value="{{ user.email }}"
+      onblur = "Validate.apply(this, 'isEmail')"
+    >
+  </div>
+</div>
+
+<div class="item">
+  <div>Senha</div>
+  <div class="input small">
+    <input
+      {% if not user.id %}
+      required
+      {% endif %}
+      type="password"
+      name="password"
+      placeholder="{{ 'Digite sua senha para atualizar o cadastro' if user.id else 'Digite uma senha segura'}}"
+    >
+  </div>
+</div>
+
+{% if not user.id %}
+<div class="item">
+  <div>Repetir Senha</div>
+  <div class="input small">
+    <input
+      required
+      type="password"
+      name="passwordRepeat"
+      placeholder="Digite sua senha mais uma vez"
+    >
+  </div>
+</div>
+{% endif %}
+
+<div class="item">
+  <div>CPF ou CNPJ</div>
+  <div class="input small">
+    <input
+      required
+      type="text"
+      name="cpf_cnpj"
+      placeholder="Digite seu documento"
+      value="{{ user.cpf_cnpj }}"
+      onkeydown="Mask.apply(this, 'cpfCnpj')"
+      onblur="Validate.apply(this, 'isCpfCnpj')"
+    >
+  </div>
+</div>
+
+<div class="item">
+  <div>CEP</div>
+  <div class="input small">
+    <input
+      required
+      type="text"
+      name="cep"
+      placeholder="00000-000"
+      value="{{ user.cep }}"
+      onkeydown="Mask.apply(this, 'cep')"
+      onblur="Validate.apply(this, 'isCep')"
+    >
+  </div>
+</div>
+
+<div class="item">
+  <div>Endereço Completo</div>
+  <div class="input">
+    <input
+      required
+      type="text"
+      name="address"
+      placeholder="Digite seu endereço completo"
+      value="{{ user.address }}"
+    >
+  </div>
+</div>
