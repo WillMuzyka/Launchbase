@@ -26,6 +26,14 @@ module.exports = {
 			console.error(error)
 		}
 	},
+	async findOne(filters) {
+		try {
+			const results = await find(this.table, filters)
+			return results.rows[0]
+		} catch (error) {
+			console.error(error)
+		}
+	},
 	async findAll(filters) {
 		try {
 			const results = await find(this.table, filters)
@@ -34,19 +42,18 @@ module.exports = {
 			console.error(error)
 		}
 	},
-	create(fields) {
+	async create(fields) {
 		let tags = [], values = []
 		Object.keys(fields).map(key => {
 			tags.push(key)
-			values.push(fields[key])
+			values.push(`'${fields[key]}'`)
 		})
 
-		const query = `
-		INSERT INTO ${this.table} ( ${tags.join(",")} )
+		const query = `INSERT INTO ${this.table} (${tags.join(",")})
 		VALUES (${values.join(",")})
-		RETURNING id`
+		RETURNING id;`
 
-		const results = db.query(query)
+		const results = await db.query(query)
 		return results.rows[0].id
 	},
 	update(id, fields) {

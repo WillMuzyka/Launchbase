@@ -1,12 +1,14 @@
+const { unlinkSync } = require('fs')
+
 const Category = require("../../models/Category")
 const Product = require("../../models/Product")
 const File = require("../../models/File")
-
-const { date, formatPrice } = require("../../lib/utils")
+const LoadProductService = require("../services/LoadProductService")
 
 module.exports = {
 	async create(req, res) {
 		try {
+			//get all the categories of the products
 			const categories = await Category.findAll()
 
 			return res.render("products/create", { categories })
@@ -21,28 +23,6 @@ module.exports = {
 	async post(req, res) {
 		let categories = []
 		try {
-			//if reloading is necessary, load the categories
-			let categories = await Category.findAll()
-			//verify if all inputs have something
-			const keys = Object.keys(req.body)
-			for (key of keys) {
-				if (key != "deleted_id" && req.body[key] == "") {
-					return res.render("products/create", {
-						error: "Por favor, preencha todos os campos",
-						categories,
-						product: req.body
-					})
-				}
-			}
-			//verify if there's at least one image
-			if (req.files.length == 0) {
-				return res.render("products/create", {
-					error: "Envie ao menos uma imagem.",
-					categories,
-					product: req.body
-				})
-			}
-
 			//create the product
 			let { category_id, name, description, old_price,
 				price, quantity, status } = req.body
@@ -81,20 +61,10 @@ module.exports = {
 	},
 	async show(req, res) {
 		try {
-			const product = await Product.find(req.params.id)
-			if (!product) return res.render("err", { errorText: "ID not found" })
+			//find the product
+			const product = await LoadProductService.load('product', { where: { id: req.params.id } })
 
-			let files = await Product.files(req.params.id)
-			files = files.map(file => ({
-				...file,
-				src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-			}))
-
-			product.published = date(product.updated_at).show
-			product.old_price = formatPrice(product.old_price)
-			product.price = formatPrice(product.price)
-
-			return res.render("products/show", { product, files })
+			return res.render("products/show", { product })
 		}
 		catch (error) {
 			console.error(error)
@@ -105,17 +75,14 @@ module.exports = {
 	},
 	async edit(req, res) {
 		try {
-			let product = await Product.find(req.params.id)
+			//find the product
+			const product = await LoadProductService.load('product', {
+				where: { id: req.params.id }
+			})
+			//get all the categories of the products
 			const categories = await Category.findAll()
 
-			let files = await Product.files(product.id)
-			files = files.map(file => ({
-				...file,
-				src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-			}))
-
-			product.price = formatPrice(product.price)
-			return res.render("products/edit", { product, categories, files })
+			return res.render("products/edit", { product, categories })
 		}
 		catch (error) {
 			console.error(error)
@@ -126,22 +93,15 @@ module.exports = {
 	},
 	async put(req, res) {
 		try {
-			const keys = Object.keys(req.body)
-			for (key of keys) {
-				if (key != "deleted_id" && req.body[key] == "")
-					return res.send("Please fill all fields!")
-			}
-
+			//get the data that is being updated, formatting the necessary
 			let { id, category_id, name, description, old_price,
 				price, quantity, status, deleted_id } = req.body
-			const price = req.body.price.replace(/\D/g, '')
-
-			//update old_price
+			price = req.body.price.replace(/\D/g, '')
+			//update old_price if the price is changed
 			const oldProduct = await Product.find(id)
 			if (price != oldProduct.price) {
 				old_price = oldProduct.price
 			}
-
 			//update 'files' if there's new photos
 			if (req.files.length > 0) {
 				const newFilesPromises = req.files.map(file => {
@@ -154,15 +114,27 @@ module.exports = {
 				})
 				await Promise.all(newFilesPromises)
 			}
-
 			//update 'files' if there's deleted photos
 			if (deleted_id) {
 				deleted_id = deleted_id.split(",")
 				deleted_id.splice(-1, 1)
-				const removedFilesPromises = deleted_id.map(idToDel => File.delete(idToDel))
+				let filesToRemovePromises = deleted_id.map(idToDel => File.find(idToDel))
+				filesToRemovePromises = await Promise.all(filesToRemovePromises)
+				//**notice that is essential to delete the file from the db
+				//**this differ from the "Product.delete" because there, deleting
+				//**the user deletes in cascade the files
+				const removedFilesPromises = filesToRemovePromises.map(file => {
+					try {
+						if (file.path != 'public/images/placeholder.png')
+							unlinkSync(file.path)
+						return File.delete(file.id)
+					}
+					catch (error) {
+						console.error(error)
+					}
+				})
 				await Promise.all(removedFilesPromises)
 			}
-
 			//update 'products' with the product values
 			await Product.update(id, {
 				category_id,
@@ -185,13 +157,23 @@ module.exports = {
 	},
 	async delete(req, res) {
 		try {
+			//find all the files related to the product
 			const { id: productId } = req.body
 			const files = await Product.files(productId)
-
-			const allFilesPromise = files.map(file => File.delete(file.id))
-			await Promise.all(allFilesPromise)
-
+			//delete the product (in cascade, will delete the files from db)
 			await Product.delete(productId)
+			//delete all the files related to the product that are saved on the folder "images"
+			//this is only made after removing the product
+			files.map(file => {
+				try {
+					if (file.path != 'public/images/placeholder.png')
+						unlinkSync(file.path)
+				}
+				catch (error) {
+					console.error(error)
+				}
+			})
+
 			return res.render("home/index", {
 				success: "Produto deletado com sucesso."
 			})

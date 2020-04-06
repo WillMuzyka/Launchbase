@@ -5,31 +5,36 @@ Base.init({ table: 'products' })
 
 module.exports = {
 	...Base,
-	search(params) {
-		const { filter, category } = params
-		let query = "", filterQuery = "WHERE"
-		if (category) {
-			filterQuery = `
-			${filterQuery} products.category_id = ${category}
-			AND`
+	async search({ filter, category }) {
+		try {
+			let query = `
+				SELECT products.*, categories.name as category_name
+				FROM products
+				LEFT JOIN categories ON (categories.id = products.category_id)
+				WHERE 1 = 1`
+
+			if (category) {
+				query += ` AND products.category_id = ${category}`
+			}
+			if (filter) {
+				query += ` AND (products.name ilike '%${filter}%'
+				OR products.description ilike '%${filter}%')`
+			}
+			query += ` AND status != 0`
+			const results = await db.query(query)
+			return results.rows
 		}
-		filterQuery = `
-		${filterQuery} products.name ilike '%${filter}%'
-			OR products.description ilike '%${filter}%'`
+		catch (error) {
+			console.error(error);
 
-		query = `
-			SELECT products.*, categories.name as category_name
-			FROM products
-			LEFT JOIN categories ON (categories.id = products.category_id)
-			${filterQuery}`
-
-		return db.query(query)
+		}
 	},
 	async files(id) {
 		try {
 			const results = await db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
 			return results.rows
-		} catch (error) {
+		}
+		catch (error) {
 			console.error(error)
 		}
 	},

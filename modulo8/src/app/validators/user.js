@@ -25,11 +25,10 @@ module.exports = {
 
 			//check if user exits (email, cpf_cnpj)
 			const { email, cpf_cnpj, password, passwordRepeat } = req.body
-			let results = await User.findOne({
+			const user = await User.findOne({
 				where: { email },
 				or: { cpf_cnpj: cpf_cnpj.replace(/\D/g, "") }
 			})
-			const user = results.rows[0]
 
 			if (user)
 				return res.render('user/register', {
@@ -52,8 +51,7 @@ module.exports = {
 	async show(req, res, next) {
 		try {
 			const { userId: id } = req.session
-			const results = await User.findOne({ where: { id } })
-			const user = results.rows[0]
+			const user = await User.findOne({ where: { id } })
 
 			if (!user) return res.render("user/register", {
 				error: "Usuário não encontrado!"
@@ -83,8 +81,7 @@ module.exports = {
 				})
 			}
 
-			let results = await User.findOne({ where: { id } })
-			const user = results.rows[0]
+			const user = await User.findOne({ where: { id } })
 
 			const passed = await compare(password, user.password)
 			if (!passed) {
@@ -101,5 +98,5 @@ module.exports = {
 		catch (err) {
 			console.error(err)
 		}
-	}
+	},
 }

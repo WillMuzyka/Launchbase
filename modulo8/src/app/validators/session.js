@@ -18,8 +18,7 @@ module.exports = {
 	async login(req, res, next) {
 		try {
 			const { email, password } = req.body
-			const results = await User.findOne({ where: { email } })
-			const user = results.rows[0]
+			const user = await User.findOne({ where: { email } })
 
 			if (!user) return res.render("session/login", {
 				error: "Usuário não cadastrado!",
@@ -45,8 +44,7 @@ module.exports = {
 	async forgot(req, res, next) {
 		try {
 			const { email } = req.body
-			let results = await User.findOne({ where: { email } })
-			user = results.rows[0]
+			const user = await User.findOne({ where: { email } })
 
 			if (!user) return res.render("session/forgot-password", {
 				error: "Usuário não cadastrado!",
@@ -54,6 +52,7 @@ module.exports = {
 			})
 
 			req.user = user
+
 			next()
 		}
 		catch (err) {
@@ -63,8 +62,7 @@ module.exports = {
 	async reset(req, res, next) {
 		try {
 			const { email, password, passwordRepeat, token } = req.body
-			let results = await User.findOne({ where: { email } })
-			user = results.rows[0]
+			const user = await User.findOne({ where: { email } })
 
 			if (!user) {
 				return res.render("session/password-reset", {
