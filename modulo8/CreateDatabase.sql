@@ -1,6 +1,6 @@
 -- create database
-DROP DATABASE IF EXISTS launchstoredb
-CREATE DATABASE launchstoredb
+DROP DATABASE IF EXISTS launchstoredb;
+CREATE DATABASE launchstoredb;
 
 -- create tables
 CREATE TABLE "products" (
@@ -85,11 +85,11 @@ WITH (OIDS=FALSE);
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 
--- to run seeds
-DELETE FROM products;
-DELETE FROM users;
-DELETE FROM files;
+-- -- run before seeds
+-- DELETE FROM products;
+-- DELETE FROM users;
+-- DELETE FROM files;
 
-ALTER SEQUENCE products_id_seq RESTART WITH 1;
-ALTER SEQUENCE users_id_seq RESTART WITH 1;
-ALTER SEQUENCE files_id_seq RESTART WITH 1;
+-- ALTER SEQUENCE products_id_seq RESTART WITH 1;
+-- ALTER SEQUENCE users_id_seq RESTART WITH 1;
+-- ALTER SEQUENCE files_id_seq RESTART WITH 1;
