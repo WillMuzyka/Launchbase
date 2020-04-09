@@ -153,23 +153,26 @@ header .search input {
 
 /* ~~ HEADER PRIMARY MENU ~~ */
 
-header nav.primary ul {
+header nav.primary>ul {
 	display: flex;
 	justify-content: space-between;
 }
 
-header nav.primary ul li a {
+header nav.primary>ul>li>a {
 	display: flex;
 	align-items: center;
+
+	height: 48px;
+
 	color: white;
 	transition: 200ms;
 }
 
-header nav.primary ul li a:hover {
+header nav.primary>ul>li>a:hover {
 	color: var(--primary-color)
 }
 
-header nav.primary ul li a i {
+header nav.primary>ul>li>a i {
 	margin-right: 8px;
 }
 

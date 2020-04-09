@@ -12,7 +12,7 @@ module.exports = {
 
 		return ({
 			iso: `${year}-${month}-${day}`,
-			show: `${day}/${month} às ${hours}h${minutes}`,
+			show: `${day}/${month}/${year} às ${hours}h${minutes}`,
 			format: `${day}/${month}/${year}`,
 			db: `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`
 		})

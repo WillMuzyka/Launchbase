@@ -33,10 +33,4 @@ routes.delete('/', onlyUsers, UserController.delete)
 //ADS
 routes.get('/ads', onlyUsers, UserController.ads)
 
-//ORDER
-routes.post('/orders', onlyUsers, OrderController.post)
-routes.get('/orders', (req, res) => res.render('orders/success'))
-routes.get('/err', (req, res) => res.render('orders/error'))
-
-
 module.exports = routes

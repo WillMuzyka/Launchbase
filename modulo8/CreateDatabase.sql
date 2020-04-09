@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS launchstoredb;
 CREATE DATABASE launchstoredb;
 
 -- create tables
-CREATE TABLE "products" (
+CREATE TABLE "products_with_deleted" (
   "id" SERIAL PRIMARY KEY,
   "category_id" int,
   "user_id" int,
@@ -14,7 +14,8 @@ CREATE TABLE "products" (
   "quantity" int DEFAULT 0,
   "status" int DEFAULT 1,
   "created_at" timestamp DEFAULT (now()),
-  "updated_at" timestamp DEFAULT (now())
+  "updated_at" timestamp DEFAULT (now()),
+	"deleted_at" timestamp
 );
 
 CREATE TABLE "categories" (
@@ -43,10 +44,26 @@ CREATE TABLE "users"(
   "updated_at" timestamp DEFAULT (now())
 );
 
+CREATE TABLE "orders" (
+	"id" SERIAL PRIMARY KEY,
+	"seller_id" int NOT NULL,
+	"buyer_id" int NOT NULL,
+	"product_id" int NOT NULL,
+	"price" int NOT NULL,
+	"total" int NOT NULL,
+	"quantity" int DEFAULT 0,
+	"status" text DEFAULT "open",
+	"created_at" timestamp DEFAULT (now()),
+	"updated_at" timestamp DEFAULT (now())	
+);
+
 -- foreign keys
 ALTER TABLE "products" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
 ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 ALTER TABLE "files" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id") ON DELETE CASCADE;
+ALTER TABLE "orders" ADD FOREIGN KEY ("seller_id") REFERENCES "users" ("id");
+ALTER TABLE "orders" ADD FOREIGN KEY ("buyer_id") REFERENCES "users" ("id");
+ALTER TABLE "orders" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
 
 -- create procedures
 CREATE FUNCTION trigger_set_timestamp()
@@ -68,6 +85,11 @@ BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON orders
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
 -- insertion of values
 INSERT INTO categories(name) VALUES ('Comida');
 INSERT INTO categories(name) VALUES ('Eletrônicos');
@@ -84,6 +106,17 @@ CREATE TABLE "session" (
 WITH (OIDS=FALSE);
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+
+-- create rule for deleting products
+CREATE OR REPLACE RULE delete_product AS
+ON DELETE TO products DO INSTEAD
+UPDATE products
+SET deleted_at = now()
+WHERE products.id = old.id;
+
+-- select only the ones that are not deleted
+CREATE VIEW products AS
+SELECT * FROM products_with_deleted WHERE deleted_at IS NULL;
 
 -- -- run before seeds
 -- DELETE FROM products;

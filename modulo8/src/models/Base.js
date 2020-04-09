@@ -44,6 +44,15 @@ module.exports = {
 			console.error(error)
 		}
 	},
+	async findOneWithDeleted(filters) {
+		try {
+			const results = await find(`${this.table}_with_deleted`, filters)
+			return results.rows[0]
+		}
+		catch (error) {
+			console.error(error)
+		}
+	},
 	async create(fields) {
 		try {
 			let tags = [], values = []
